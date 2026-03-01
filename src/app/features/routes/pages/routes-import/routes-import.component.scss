@@ -1,32 +1,32 @@
 .import-container {
-  padding: 40px 24px;
+  padding: 28px 20px;
   max-width: 600px;
   margin: 0 auto;
-  background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+  background: linear-gradient(135deg, #e6e8e6 0%, #dadcda 100%);
   min-height: calc(100vh - 72px);
   font-family: 'Poppins', sans-serif;
 
   .import-card {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-    border: 1.5px solid rgba(170, 213, 0, 0.15);
-    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    border: 2px solid rgba(106, 142, 0, 0.12);
     animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     overflow: hidden;
+    background: #fff;
 
     .upload-section {
       display: flex;
       flex-direction: column;
-      gap: 24px;
-      padding: 32px;
+      gap: 20px;
+      padding: 28px;
       animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
     }
 
     .upload-area {
-      border: 3px dashed #AAD500;
+      border: 2px dashed #689900;
       border-radius: 12px;
-      padding: 60px 30px;
+      padding: 40px 24px;
       text-align: center;
-      background: linear-gradient(135deg, rgba(170, 213, 0, 0.06) 0%, rgba(127, 168, 0, 0.02) 100%);
+      background: linear-gradient(135deg, rgba(106, 142, 0, 0.08) 0%, rgba(106, 142, 0, 0.03) 100%);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
@@ -35,53 +35,53 @@
         content: '';
         position: absolute;
         inset: 0;
-        background: radial-gradient(circle at center, rgba(170, 213, 0, 0.1) 0%, transparent 70%);
+        background: radial-gradient(circle at center, rgba(104, 153, 0, 0.1) 0%, transparent 70%);
         opacity: 0;
         transition: opacity 0.3s ease;
       }
 
       &:hover {
-        border-color: #7fa800;
-        background: linear-gradient(135deg, rgba(170, 213, 0, 0.1) 0%, rgba(127, 168, 0, 0.05) 100%);
+        border-color: #5a7700;
+        background: linear-gradient(135deg, rgba(106, 142, 0, 0.12) 0%, rgba(106, 142, 0, 0.06) 100%);
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(170, 213, 0, 0.12);
+        box-shadow: 0 10px 24px rgba(106, 142, 0, 0.15);
 
         &::before { opacity: 1; }
       }
 
       .upload-icon {
-        font-size: 64px;
-        width: 64px;
-        height: 64px;
-        color: #AAD500;
-        margin: 0 auto 20px;
+        font-size: 52px;
+        width: 52px;
+        height: 52px;
+        color: #689900;
+        margin: 0 auto 14px;
         animation: float 3s ease-in-out infinite;
-        filter: drop-shadow(0 4px 12px rgba(170, 213, 0, 0.25));
+        filter: drop-shadow(0 4px 12px rgba(106, 142, 0, 0.2));
       }
 
       h3 {
-        margin: 15px 0;
-        color: #222;
-        font-weight: 700;
-        font-size: 18px;
+        margin: 12px 0;
+        color: #1a1a1a;
+        font-weight: 800;
+        font-size: 16px;
         font-family: 'Poppins', sans-serif;
         letter-spacing: -0.3px;
       }
 
       p {
-        color: #666;
-        margin-bottom: 24px;
-        font-size: 14px;
+        color: #555;
+        margin-bottom: 18px;
+        font-size: 13px;
         font-family: 'Poppins', sans-serif;
       }
 
       button {
-        margin: 0 10px;
+        margin: 0 8px;
         border-radius: 8px;
-        padding: 10px 24px;
-        font-size: 13px;
+        padding: 9px 20px;
+        font-size: 12px;
         font-family: 'Poppins', sans-serif;
-        font-weight: 600;
+        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -89,24 +89,26 @@
         border: none;
 
         &:first-child {
-          background: linear-gradient(90deg, #AAD500 0%, #7fa800 100%);
+          background: linear-gradient(135deg, #689900 0%, #5a7700 100%);
           color: #fff;
-          box-shadow: 0 8px 20px rgba(170, 213, 0, 0.25);
+          box-shadow: 0 8px 20px rgba(106, 142, 0, 0.28);
 
           &:hover {
-            box-shadow: 0 12px 32px rgba(170, 213, 0, 0.35);
+            box-shadow: 0 12px 32px rgba(106, 142, 0, 0.35);
             transform: translateY(-3px);
           }
         }
 
         &:last-child {
           background: transparent;
-          color: #7fa800;
-          border: 2px solid #AAD500;
+          color: #689900;
+          border: 2px solid #689900;
+          box-shadow: 0 4px 12px rgba(106, 142, 0, 0.1);
 
           &:hover {
-            background: rgba(170, 213, 0, 0.08);
+            background: rgba(106, 142, 0, 0.08);
             transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(106, 142, 0, 0.15);
           }
         }
       }
@@ -115,18 +117,18 @@
     .file-preview {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 18px;
-      background: linear-gradient(135deg, rgba(170, 213, 0, 0.08) 0%, rgba(127, 168, 0, 0.03) 100%);
+      gap: 14px;
+      padding: 14px;
+      background: linear-gradient(135deg, rgba(106, 142, 0, 0.08) 0%, rgba(106, 142, 0, 0.03) 100%);
       border-radius: 10px;
-      border: 1.5px solid rgba(170, 213, 0, 0.15);
+      border: 1.5px solid rgba(106, 142, 0, 0.15);
       animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 
       .file-icon {
-        font-size: 40px;
-        width: 40px;
-        height: 40px;
-        color: #7fa800;
+        font-size: 32px;
+        width: 32px;
+        height: 32px;
+        color: #689900;
         flex-shrink: 0;
       }
 
@@ -136,15 +138,15 @@
         .file-name {
           margin: 0;
           font-weight: 700;
-          color: #222;
-          font-size: 14px;
+          color: #1a1a1a;
+          font-size: 13px;
           font-family: 'Poppins', sans-serif;
         }
 
         .file-size {
-          margin: 6px 0 0 0;
-          font-size: 12px;
-          color: #7fa800;
+          margin: 4px 0 0 0;
+          font-size: 11px;
+          color: #689900;
           font-weight: 600;
           font-family: 'Poppins', sans-serif;
         }
@@ -153,30 +155,31 @@
 
     .action-buttons {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       justify-content: center;
-      padding: 24px 32px 32px;
+      padding: 20px 28px 24px;
       animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
 
       .import-btn {
-        min-width: 160px;
-        background: linear-gradient(90deg, #AAD500 0%, #7fa800 100%);
+        min-width: 140px;
+        background: linear-gradient(135deg, #689900 0%, #5a7700 100%);
         color: #fff;
-        font-weight: 700;
-        border: none;
+        font-weight: 800;
+        border: 2px solid rgba(255, 255, 255, 0.2);
         border-radius: 8px;
-        padding: 12px 32px;
-        font-size: 13px;
+        padding: 10px 26px;
+        font-size: 12px;
         font-family: 'Poppins', sans-serif;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         cursor: pointer;
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        box-shadow: 0 8px 20px rgba(170, 213, 0, 0.25);
+        box-shadow: 0 10px 28px rgba(106, 142, 0, 0.3);
 
         &:hover {
-          box-shadow: 0 12px 32px rgba(170, 213, 0, 0.35);
+          box-shadow: 0 14px 40px rgba(106, 142, 0, 0.4);
           transform: translateY(-4px);
+          background: linear-gradient(135deg, #5a7700 0%, #475c00 100%);
         }
 
         &:active {
@@ -188,29 +191,29 @@
     .success-section,
     .error-section {
       text-align: center;
-      padding: 48px 32px;
+      padding: 40px 28px;
       border-radius: 12px;
       margin: 0;
-      border: 1.5px solid;
+      border: 2px solid;
       animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .success-section {
-      background: linear-gradient(135deg, rgba(76, 175, 80, 0.08) 0%, rgba(76, 175, 80, 0.03) 100%);
-      border-color: rgba(76, 175, 80, 0.2);
+      background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.03) 100%);
+      border-color: rgba(76, 175, 80, 0.25);
 
       .success-icon {
-        font-size: 64px;
+        font-size: 56px;
         color: #4caf50;
-        margin: 0 auto 20px;
+        margin: 0 auto 16px;
         display: block;
         animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       h3 {
         color: #4caf50;
-        font-size: 22px;
-        font-weight: 700;
+        font-size: 20px;
+        font-weight: 800;
         font-family: 'Poppins', sans-serif;
         margin: 12px 0;
         letter-spacing: -0.3px;
@@ -218,16 +221,16 @@
 
       p {
         color: #2d6a4f;
-        margin: 12px 0;
+        margin: 10px 0;
         font-family: 'Poppins', sans-serif;
-        font-size: 13px;
+        font-size: 12px;
       }
 
       .action-links {
         display: flex;
-        gap: 16px;
+        gap: 12px;
         justify-content: center;
-        margin-top: 32px;
+        margin-top: 24px;
         flex-wrap: wrap;
 
         a, button {
@@ -235,11 +238,11 @@
           font-weight: 700;
           color: #4caf50;
           border: 2px solid #4caf50;
-          padding: 12px 24px;
+          padding: 10px 20px;
           border-radius: 8px;
           background: transparent;
           cursor: pointer;
-          font-size: 12px;
+          font-size: 11px;
           font-family: 'Poppins', sans-serif;
           text-transform: uppercase;
           letter-spacing: 0.5px;
@@ -249,7 +252,7 @@
             background: #4caf50;
             color: #fff;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.25);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
           }
 
           &:active {
@@ -260,21 +263,21 @@
     }
 
     .error-section {
-      background: linear-gradient(135deg, rgba(211, 47, 47, 0.08) 0%, rgba(211, 47, 47, 0.03) 100%);
-      border-color: rgba(211, 47, 47, 0.2);
+      background: linear-gradient(135deg, rgba(211, 47, 47, 0.1) 0%, rgba(211, 47, 47, 0.03) 100%);
+      border-color: rgba(211, 47, 47, 0.25);
 
       .error-icon {
-        font-size: 64px;
+        font-size: 56px;
         color: #d32f2f;
-        margin: 0 auto 20px;
+        margin: 0 auto 16px;
         display: block;
         animation: shake 0.5s ease-in-out;
       }
 
       h3 {
         color: #d32f2f;
-        font-size: 22px;
-        font-weight: 700;
+        font-size: 20px;
+        font-weight: 800;
         font-family: 'Poppins', sans-serif;
         margin: 12px 0;
         letter-spacing: -0.3px;
@@ -282,30 +285,31 @@
 
       p {
         color: #7f0000;
-        margin: 12px 0;
+        margin: 10px 0;
         font-family: 'Poppins', sans-serif;
-        font-size: 13px;
+        font-size: 12px;
       }
 
       .retry-btn {
-        margin-top: 32px;
-        background: linear-gradient(90deg, #d32f2f 0%, #b71c1c 100%);
+        margin-top: 24px;
+        background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
         color: #fff;
-        font-weight: 700;
-        border: none;
+        font-weight: 800;
+        border: 2px solid rgba(255, 255, 255, 0.2);
         border-radius: 8px;
-        padding: 12px 32px;
-        font-size: 13px;
+        padding: 10px 26px;
+        font-size: 12px;
         font-family: 'Poppins', sans-serif;
         text-transform: uppercase;
         letter-spacing: 0.5px;
         cursor: pointer;
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        box-shadow: 0 8px 20px rgba(211, 47, 47, 0.25);
+        box-shadow: 0 10px 28px rgba(211, 47, 47, 0.3);
 
         &:hover {
-          box-shadow: 0 12px 32px rgba(211, 47, 47, 0.35);
+          box-shadow: 0 14px 40px rgba(211, 47, 47, 0.4);
           transform: translateY(-4px);
+          background: linear-gradient(135deg, #b71c1c 0%, #8b0000 100%);
         }
 
         &:active {

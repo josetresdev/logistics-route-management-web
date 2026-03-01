@@ -5,7 +5,7 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
-// Define custom color palette inspired by logistics backend
+// Define custom color palette - softer greens for better UX
 $custom-primary: (
   0: #000000,
   10: #2a3a00,
@@ -14,12 +14,12 @@ $custom-primary: (
   30: #556200,
   35: #606b00,
   40: #6b7500,
-  50: #87900f,
-  60: #AAD500,
-  70: #c3e34f,
-  80: #d4ed68,
-  90: #e5f996,
-  95: #f2ffc9,
+  50: #758219,
+  60: #92b700,
+  70: #a6c91f,
+  80: #b8d452,
+  90: #cde07f,
+  95: #dded9d,
   99: #fffbf5,
   100: #ffffff,
 );
@@ -72,12 +72,25 @@ html, body {
 .mat-mdc-button,
 .mat-mdc-raised-button {
   &.mat-primary {
-    --mdc-theme-primary: #AAD500;
+    --mdc-theme-primary: #92b700;
   }
 }
 
 .mat-mdc-card {
   border-radius: 12px;
+}
+
+/* Font Awesome Icons */
+i[class*="fa-"] {
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands' !important;
+}
+
+.fas {
+  font-weight: 900 !important;
+}
+
+.fab {
+  font-weight: 400 !important;
 }
 
 /* Scrollbar Styling */
@@ -91,7 +104,7 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #AAD500;
+  background: #92b700;
   border-radius: 4px;
 
   &:hover {

@@ -1,31 +1,49 @@
 .logs-container {
-  padding: 24px;
-  background: linear-gradient(135deg, #f7f7f7 0%, #ffffff 100%);
-  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #e6e8e6 0%, #dadcda 100%);
+  min-height: calc(100vh - 76px);
 
   mat-card {
-    box-shadow: 0 4px 16px rgba(170, 213, 0, 0.1);
-    border: 2px solid #AAD500;
-    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    border: 2px solid rgba(106, 142, 0, 0.12);
+    background: #fff;
 
     mat-card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
-      padding: 16px;
-      border-bottom: 2px solid #AAD500;
+      margin-bottom: 0;
+      padding: 20px 24px;
+      border-bottom: 2px solid rgba(106, 142, 0, 0.12);
+      background: linear-gradient(90deg, rgba(106, 142, 0, 0.02) 0%, transparent 100%);
 
       mat-card-title {
         margin: 0;
-        color: #222;
-        font-weight: 700;
+        color: #1a1a1a;
+        font-weight: 900;
+        font-size: 18px;
+        font-family: 'Poppins', sans-serif;
       }
 
       button {
-        background: linear-gradient(90deg, #AAD500 0%, #7fa800 100%);
+        background: linear-gradient(135deg, #689900 0%, #5a7700 100%);
         color: #fff;
-        font-weight: 600;
+        font-weight: 700;
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(106, 142, 0, 0.25);
+
+        &:hover {
+          box-shadow: 0 12px 32px rgba(106, 142, 0, 0.35);
+          transform: translateY(-3px);
+          background: linear-gradient(135deg, #5a7700 0%, #475c00 100%);
+        }
       }
     }
 
@@ -33,77 +51,142 @@
       .loading-spinner {
         display: flex;
         justify-content: center;
+        align-items: center;
         padding: 60px 20px;
+        min-height: 300px;
+        animation: fadeIn 0.5s ease;
+
+        &::after {
+          content: '';
+          width: 50px;
+          height: 50px;
+          border: 4px solid rgba(106, 142, 0, 0.1);
+          border-top-color: #689900;
+          border-right-color: #5a7700;
+          border-radius: 50%;
+          animation: spin 1.2s linear infinite;
+          box-shadow: 0 0 20px rgba(106, 142, 0, 0.25);
+        }
       }
 
       .logs-table {
         width: 100%;
         border-collapse: collapse;
+        font-family: 'Poppins', sans-serif;
 
         th {
-          background: linear-gradient(90deg, #AAD500 0%, #7fa800 100%);
-          font-weight: 700;
+          background: linear-gradient(90deg, #5a7700 0%, #475c00 100%);
+          font-weight: 900;
           text-align: left;
-          padding: 16px;
+          padding: 16px 20px;
           color: #fff;
-          font-size: 14px;
+          font-size: 11px;
+          letter-spacing: 0.8px;
+          text-transform: uppercase;
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          border-bottom: 3px solid rgba(0, 0, 0, 0.2);
+          position: sticky;
+          top: 0;
+          z-index: 10;
         }
 
         td {
-          padding: 14px 16px;
-          border-bottom: 1px solid #e0e0e0;
-          color: #222;
+          padding: 14px 20px;
+          border-bottom: 1.5px solid rgba(106, 142, 0, 0.15);
+          color: #1a1a1a;
+          font-size: 12px;
+          font-weight: 500;
         }
 
-        tr:hover {
-          background-color: rgba(170, 213, 0, 0.05);
+        tr {
+          background: linear-gradient(180deg, rgba(106, 142, 0, 0.03) 0%, transparent 100%);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+          &:hover {
+            background: linear-gradient(180deg, rgba(106, 142, 0, 0.12) 0%, rgba(106, 142, 0, 0.05) 100%);
+            box-shadow: inset 0 0 16px rgba(106, 142, 0, 0.1), 0 4px 12px rgba(106, 142, 0, 0.08);
+            transform: scale(1.005);
+          }
+
+          &:nth-child(even) {
+            background: linear-gradient(180deg, rgba(106, 142, 0, 0.05) 0%, rgba(106, 142, 0, 0.02) 100%);
+          }
         }
 
         .action-create {
-          background: rgba(67, 209, 103, 0.1);
-          color: #43d167;
-          font-weight: 600;
-          padding: 6px 12px;
+          background: linear-gradient(135deg, rgba(76, 175, 80, 0.15) 0%, rgba(76, 175, 80, 0.08) 100%);
+          color: #4caf50;
+          font-weight: 800;
+          padding: 8px 12px;
           border-radius: 6px;
+          font-size: 10px;
+          letter-spacing: 0.3px;
+          border: 1px solid rgba(76, 175, 80, 0.2);
+          box-shadow: 0 2px 6px rgba(76, 175, 80, 0.12);
+          text-transform: uppercase;
         }
 
         .action-update {
-          background: rgba(255, 152, 0, 0.1);
+          background: linear-gradient(135deg, rgba(255, 152, 0, 0.15) 0%, rgba(255, 152, 0, 0.08) 100%);
           color: #ff9800;
-          font-weight: 600;
-          padding: 6px 12px;
+          font-weight: 800;
+          padding: 8px 12px;
           border-radius: 6px;
+          font-size: 10px;
+          letter-spacing: 0.3px;
+          border: 1px solid rgba(255, 152, 0, 0.2);
+          box-shadow: 0 2px 6px rgba(255, 152, 0, 0.12);
+          text-transform: uppercase;
         }
 
         .action-execute {
-          background: rgba(170, 213, 0, 0.1);
-          color: #7fa800;
-          font-weight: 600;
-          padding: 6px 12px;
+          background: linear-gradient(135deg, rgba(106, 142, 0, 0.15) 0%, rgba(106, 142, 0, 0.08) 100%);
+          color: #689900;
+          font-weight: 800;
+          padding: 8px 12px;
           border-radius: 6px;
+          font-size: 10px;
+          letter-spacing: 0.3px;
+          border: 1px solid rgba(106, 142, 0, 0.2);
+          box-shadow: 0 2px 6px rgba(106, 142, 0, 0.12);
+          text-transform: uppercase;
         }
 
         .action-delete {
-          background: rgba(211, 47, 47, 0.1);
+          background: linear-gradient(135deg, rgba(211, 47, 47, 0.15) 0%, rgba(211, 47, 47, 0.08) 100%);
           color: #d32f2f;
-          font-weight: 600;
-          padding: 6px 12px;
+          font-weight: 800;
+          padding: 8px 12px;
           border-radius: 6px;
+          font-size: 10px;
+          letter-spacing: 0.3px;
+          border: 1px solid rgba(211, 47, 47, 0.2);
+          box-shadow: 0 2px 6px rgba(211, 47, 47, 0.12);
+          text-transform: uppercase;
         }
 
         .details-badge {
-          background: linear-gradient(90deg, #AAD500 0%, #7fa800 100%);
+          background: linear-gradient(135deg, #689900 0%, #5a7700 100%);
           color: white;
-          padding: 6px 12px;
+          padding: 8px 12px;
           border-radius: 6px;
-          font-size: 12px;
+          font-size: 10px;
           cursor: pointer;
-          font-weight: 600;
-          transition: all 0.3s ease;
+          font-weight: 800;
+          letter-spacing: 0.3px;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          box-shadow: 0 4px 12px rgba(106, 142, 0, 0.2);
+          text-transform: uppercase;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
           &:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(170, 213, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(106, 142, 0, 0.3);
+            background: linear-gradient(135deg, #5a7700 0%, #475c00 100%);
+          }
+
+          &:active {
+            transform: translateY(0);
           }
         }
       }
@@ -111,12 +194,20 @@
       .no-data {
         text-align: center;
         padding: 60px 20px;
-        color: #7fa800;
-        font-size: 16px;
-        font-weight: 600;
-        background: rgba(170, 213, 0, 0.05);
-        border-radius: 8px;
+        color: #689900;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, rgba(106, 142, 0, 0.08) 0%, rgba(106, 142, 0, 0.03) 100%);
+        border-radius: 12px;
+        border: 2px dashed rgba(106, 142, 0, 0.25);
+        letter-spacing: 0.3px;
       }
     }
   }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

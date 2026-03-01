@@ -6,11 +6,10 @@
       <!-- Header -->
       <div class="login-header">
         <div class="logo-container">
-          <img src="logo.png" alt="Falabella Logistics" class="logo-image" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%23AAD500%22 width=%22100%22 height=%22100%22/></svg>'">
-          <mat-icon class="logo-icon-backup" *ngIf="false">local_shipping</mat-icon>
+          <i class="fas fa-truck logo-icon-fa"></i>
         </div>
         <h1>Logistics</h1>
-        <p>Route Management System</p>
+        <p>Sistema de Gestión de Rutas</p>
       </div>
 
       <!-- Form -->
@@ -24,9 +23,9 @@
                    type="text"
                    autocomplete="username"
                    required>
-            <mat-icon matPrefix>person_outline</mat-icon>
+            <i class="fas fa-user form-icon-prefix"></i>
             <mat-error *ngIf="submitted && f['username'].errors">
-              El usuario es requerido
+              <i class="fas fa-exclamation-circle"></i> El usuario es requerido
             </mat-error>
           </mat-form-field>
         </div>
@@ -40,17 +39,17 @@
                    [type]="hidePassword ? 'password' : 'text'"
                    autocomplete="password"
                    required>
-            <mat-icon matPrefix>lock_outline</mat-icon>
+            <i class="fas fa-lock form-icon-prefix"></i>
             <button mat-icon-button 
-                    matSuffix 
+                    class="form-icon-suffix"
                     (click)="togglePasswordVisibility()"
                     type="button"
                     tabindex="-1">
-              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              <i [class]="hidePassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
             </button>
             <mat-error *ngIf="submitted && f['password'].errors">
-              <span *ngIf="f['password'].errors['required']">La contraseña es requerida</span>
-              <span *ngIf="f['password'].errors['minlength']">Mínimo 6 caracteres</span>
+              <span *ngIf="f['password'].errors['required']"><i class="fas fa-exclamation-circle"></i> La contraseña es requerida</span>
+              <span *ngIf="f['password'].errors['minlength']"><i class="fas fa-exclamation-circle"></i> Mínimo 6 caracteres</span>
             </mat-error>
           </mat-form-field>
         </div>
@@ -60,48 +59,48 @@
                 type="submit"
                 class="login-btn"
                 [disabled]="loading">
-          <mat-icon *ngIf="!loading">login</mat-icon>
+          <i *ngIf="!loading" class="fas fa-sign-in-alt"></i>
           <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
           {{ loading ? 'Iniciando sesión...' : 'Ingresar' }}
         </button>
 
         <!-- Error Message -->
         <div *ngIf="errorMessage" class="error-message" role="alert">
-          <mat-icon>error_outline</mat-icon>
+          <i class="fas fa-circle-exclamation"></i>
           <span>{{ errorMessage }}</span>
         </div>
       </form>
 
       <!-- Help Text -->
       <div class="help-text">
-        <p>Demostración</p>
-        <code>admin</code>
-        <code>admin123</code>
+        <i class="fas fa-info-circle"></i>
+        <p><strong>Credenciales de Demo:</strong></p>
+        <code>admin</code> / <code>admin123</code>
       </div>
     </div>
 
     <!-- Right Section -->
     <div class="login-info">
       <div class="info-content">
-        <h2>Gestión de Rutas<br>Inteligente</h2>
-        <p>Optimiza tus operaciones logísticas con nuestro sistema de gestión de rutas en tiempo real.</p>
+        <h2>Gestión <span>Inteligente</span><br>de Rutas</h2>
+        <p>Optimiza operaciones logísticas con gestión de rutas en tiempo real</p>
         
         <ul class="features">
           <li>
-            <mat-icon>check_circle_outline</mat-icon>
+            <i class="fas fa-check-circle feature-icon"></i>
             <span>Control completo de rutas</span>
           </li>
           <li>
-            <mat-icon>check_circle_outline</mat-icon>
+            <i class="fas fa-check-circle feature-icon"></i>
             <span>Seguimiento en tiempo real</span>
           </li>
           <li>
-            <mat-icon>check_circle_outline</mat-icon>
+            <i class="fas fa-check-circle feature-icon"></i>
             <span>Análisis detallado de logs</span>
           </li>
           <li>
-            <mat-icon>check_circle_outline</mat-icon>
-            <span>Importación automática de datos</span>
+            <i class="fas fa-check-circle feature-icon"></i>
+            <span>Importación automática</span>
           </li>
         </ul>
       </div>
