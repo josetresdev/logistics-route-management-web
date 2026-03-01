@@ -1,0 +1,122 @@
+.logs-container {
+  padding: 24px;
+  background: linear-gradient(135deg, #f7f7f7 0%, #ffffff 100%);
+  min-height: 100vh;
+
+  mat-card {
+    box-shadow: 0 4px 16px rgba(170, 213, 0, 0.1);
+    border: 2px solid #AAD500;
+    border-radius: 12px;
+
+    mat-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 16px;
+      border-bottom: 2px solid #AAD500;
+
+      mat-card-title {
+        margin: 0;
+        color: #222;
+        font-weight: 700;
+      }
+
+      button {
+        background: linear-gradient(90deg, #AAD500 0%, #7fa800 100%);
+        color: #fff;
+        font-weight: 600;
+      }
+    }
+
+    mat-card-content {
+      .loading-spinner {
+        display: flex;
+        justify-content: center;
+        padding: 60px 20px;
+      }
+
+      .logs-table {
+        width: 100%;
+        border-collapse: collapse;
+
+        th {
+          background: linear-gradient(90deg, #AAD500 0%, #7fa800 100%);
+          font-weight: 700;
+          text-align: left;
+          padding: 16px;
+          color: #fff;
+          font-size: 14px;
+        }
+
+        td {
+          padding: 14px 16px;
+          border-bottom: 1px solid #e0e0e0;
+          color: #222;
+        }
+
+        tr:hover {
+          background-color: rgba(170, 213, 0, 0.05);
+        }
+
+        .action-create {
+          background: rgba(67, 209, 103, 0.1);
+          color: #43d167;
+          font-weight: 600;
+          padding: 6px 12px;
+          border-radius: 6px;
+        }
+
+        .action-update {
+          background: rgba(255, 152, 0, 0.1);
+          color: #ff9800;
+          font-weight: 600;
+          padding: 6px 12px;
+          border-radius: 6px;
+        }
+
+        .action-execute {
+          background: rgba(170, 213, 0, 0.1);
+          color: #7fa800;
+          font-weight: 600;
+          padding: 6px 12px;
+          border-radius: 6px;
+        }
+
+        .action-delete {
+          background: rgba(211, 47, 47, 0.1);
+          color: #d32f2f;
+          font-weight: 600;
+          padding: 6px 12px;
+          border-radius: 6px;
+        }
+
+        .details-badge {
+          background: linear-gradient(90deg, #AAD500 0%, #7fa800 100%);
+          color: white;
+          padding: 6px 12px;
+          border-radius: 6px;
+          font-size: 12px;
+          cursor: pointer;
+          font-weight: 600;
+          transition: all 0.3s ease;
+
+          &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(170, 213, 0, 0.3);
+          }
+        }
+      }
+
+      .no-data {
+        text-align: center;
+        padding: 60px 20px;
+        color: #7fa800;
+        font-size: 16px;
+        font-weight: 600;
+        background: rgba(170, 213, 0, 0.05);
+        border-radius: 8px;
+      }
+    }
+  }
+}

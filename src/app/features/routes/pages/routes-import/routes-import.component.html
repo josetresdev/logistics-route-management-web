@@ -1,0 +1,91 @@
+<div class="import-container">
+  <mat-card class="import-card">
+    <mat-card-header>
+      <mat-card-title>Importar Rutas desde Excel</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="upload-section" *ngIf="!importResult">
+        <div class="upload-area">
+          <mat-icon class="upload-icon">cloud_upload</mat-icon>
+          <h3>Selecciona un archivo Excel</h3>
+          <p>Arrastra tu archivo aquí o haz clic para seleccionar</p>
+          
+          <input 
+            #fileInput 
+            type="file" 
+            accept=".xlsx,.xls" 
+            (change)="onFileSelected($event)"
+            hidden>
+          
+          <button 
+            mat-raised-button 
+            color="primary"
+            (click)="fileInput.click()"
+            [disabled]="isLoading">
+            <mat-icon>attach_file</mat-icon>
+            Seleccionar Archivo
+          </button>
+        </div>
+
+        <div *ngIf="selectedFile" class="file-preview">
+          <mat-icon class="file-icon">description</mat-icon>
+          <div class="file-info">
+            <p class="file-name">{{ selectedFile.name }}</p>
+            <p class="file-size">{{ (selectedFile.size / 1024).toFixed(2) }} KB</p>
+          </div>
+          <button 
+            mat-icon-button 
+            (click)="resetForm()"
+            [disabled]="isLoading">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <div class="action-buttons" *ngIf="selectedFile">
+          <button 
+            mat-raised-button 
+            color="primary"
+            (click)="importFile()"
+            [disabled]="isLoading"
+            class="import-btn">
+            <mat-icon *ngIf="!isLoading">upload</mat-icon>
+            {{ isLoading ? 'Importando...' : 'Importar' }}
+          </button>
+          <button 
+            mat-stroked-button 
+            (click)="resetForm()"
+            [disabled]="isLoading">
+            Cancelar
+          </button>
+        </div>
+      </div>
+
+      <div class="success-section" *ngIf="importResult && !hasErrors">
+        <mat-icon class="success-icon">check_circle</mat-icon>
+        <h3>¡Importación Exitosa!</h3>
+        <p>{{ successMessage }}</p>
+      </div>
+
+      <div class="error-section" *ngIf="hasErrors && importResult">
+        <mat-icon class="error-icon">error</mat-icon>
+        <h3>Error en la Importación</h3>
+        <p>{{ importResult.message }}</p>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions *ngIf="importResult">
+      <button 
+        mat-raised-button 
+        color="primary"
+        routerLink="/routes">
+        Ver Rutas
+      </button>
+      <button 
+        mat-stroked-button 
+        (click)="resetForm()">
+        Importar Otro Archivo
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

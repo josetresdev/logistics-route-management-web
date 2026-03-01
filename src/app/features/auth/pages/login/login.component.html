@@ -1,0 +1,110 @@
+<div class="login-container">
+  <div class="login-background"></div>
+  
+  <div class="login-content">
+    <div class="login-card">
+      <!-- Header -->
+      <div class="login-header">
+        <div class="logo-container">
+          <img src="logo.png" alt="Falabella Logistics" class="logo-image" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect fill=%22%23AAD500%22 width=%22100%22 height=%22100%22/></svg>'">
+          <mat-icon class="logo-icon-backup" *ngIf="false">local_shipping</mat-icon>
+        </div>
+        <h1>Logistics</h1>
+        <p>Route Management System</p>
+      </div>
+
+      <!-- Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Username -->
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Usuario / Email</mat-label>
+            <input matInput 
+                   formControlName="username"
+                   type="text"
+                   autocomplete="username"
+                   required>
+            <mat-icon matPrefix>person_outline</mat-icon>
+            <mat-error *ngIf="submitted && f['username'].errors">
+              El usuario es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Contraseña</mat-label>
+            <input matInput 
+                   formControlName="password"
+                   [type]="hidePassword ? 'password' : 'text'"
+                   autocomplete="password"
+                   required>
+            <mat-icon matPrefix>lock_outline</mat-icon>
+            <button mat-icon-button 
+                    matSuffix 
+                    (click)="togglePasswordVisibility()"
+                    type="button"
+                    tabindex="-1">
+              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            <mat-error *ngIf="submitted && f['password'].errors">
+              <span *ngIf="f['password'].errors['required']">La contraseña es requerida</span>
+              <span *ngIf="f['password'].errors['minlength']">Mínimo 6 caracteres</span>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- Submit Button -->
+        <button mat-raised-button 
+                type="submit"
+                class="login-btn"
+                [disabled]="loading">
+          <mat-icon *ngIf="!loading">login</mat-icon>
+          <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+          {{ loading ? 'Iniciando sesión...' : 'Ingresar' }}
+        </button>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="error-message" role="alert">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ errorMessage }}</span>
+        </div>
+      </form>
+
+      <!-- Help Text -->
+      <div class="help-text">
+        <p>Demostración</p>
+        <code>admin</code>
+        <code>admin123</code>
+      </div>
+    </div>
+
+    <!-- Right Section -->
+    <div class="login-info">
+      <div class="info-content">
+        <h2>Gestión de Rutas<br>Inteligente</h2>
+        <p>Optimiza tus operaciones logísticas con nuestro sistema de gestión de rutas en tiempo real.</p>
+        
+        <ul class="features">
+          <li>
+            <mat-icon>check_circle_outline</mat-icon>
+            <span>Control completo de rutas</span>
+          </li>
+          <li>
+            <mat-icon>check_circle_outline</mat-icon>
+            <span>Seguimiento en tiempo real</span>
+          </li>
+          <li>
+            <mat-icon>check_circle_outline</mat-icon>
+            <span>Análisis detallado de logs</span>
+          </li>
+          <li>
+            <mat-icon>check_circle_outline</mat-icon>
+            <span>Importación automática de datos</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
