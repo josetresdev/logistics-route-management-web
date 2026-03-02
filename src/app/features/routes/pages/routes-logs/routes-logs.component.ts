@@ -1,26 +1,61 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RoutesService } from '../../services/routes.service';
-import { RouteLogs } from '../../../../shared/models/route.model';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
+
+import { CommonModule, DatePipe } from '@angular/common';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
+
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, finalize } from 'rxjs/operators';
+
+import { RoutesService } from '../../services/routes.service';
+import { RouteLog } from '../../../../shared/models/route.model';
 
 @Component({
   selector: 'app-routes-logs',
-  standalone: false,
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    CommonModule,
+    DatePipe,
+    MatTableModule,
+    MatCardModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatButtonModule
+  ],
   templateUrl: './routes-logs.component.html',
   styleUrls: ['./routes-logs.component.scss']
 })
 export class RoutesLogsComponent implements OnInit, OnDestroy {
-  logs: RouteLogs[] = [];
-  isLoading = false;
-  displayedColumns: string[] = ['id', 'route_id', 'action', 'timestamp', 'details'];
 
-  private destroy$ = new Subject<void>();
+  logs: RouteLog[] = [];
+  isLoading = false;
+
+  displayedColumns: string[] = [
+    'id',
+    'route_id',
+    'action',
+    'message',
+    'timestamp'
+  ];
+
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
-    private routesService: RoutesService,
-    private snackBar: MatSnackBar
+    private readonly routesService: RoutesService,
+    private readonly snackBar: MatSnackBar,
+    private readonly cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -32,33 +67,52 @@ export class RoutesLogsComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  loadLogs(): void {
+  /* ================= LOAD LOGS ================= */
+
+  loadLogs(page: number = 1, pageSize: number = 25): void {
+
     this.isLoading = true;
-    this.routesService.getLogs()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (data: RouteLogs[]) => {
-          this.logs = data;
+    this.cdr.markForCheck();
+
+    this.routesService.getExecutionLogs(page, pageSize)
+      .pipe(
+        takeUntil(this.destroy$),
+        finalize(() => {
           this.isLoading = false;
+          this.cdr.markForCheck();
+        })
+      )
+      .subscribe({
+
+        next: (response: any) => {
+          // DRF paginated response
+          this.logs = response?.results ?? [];
         },
-        (error) => {
-          this.snackBar.open('Error cargando logs', 'Cerrar', { duration: 5000 });
-          this.isLoading = false;
+
+        error: () => {
+          this.snackBar.open('Error cargando logs', 'Cerrar', { duration: 4000 });
         }
-      );
+      });
   }
 
   refreshLogs(): void {
     this.loadLogs();
   }
 
+  /* ================= HELPERS ================= */
+
   getActionLabel(action: string): string {
-    const actionMap: { [key: string]: string } = {
-      'create': 'Creada',
-      'update': 'Actualizada',
-      'execute': 'Ejecutada',
-      'delete': 'Eliminada'
+    const map: Record<string, string> = {
+      create: 'Creación',
+      update: 'Actualización',
+      delete: 'Eliminación',
+      execute: 'Ejecución'
     };
-    return actionMap[action] || action;
+
+    return map[action] ?? action;
+  }
+
+  trackById(_: number, item: RouteLog): number {
+    return item.id ?? 0;
   }
 }

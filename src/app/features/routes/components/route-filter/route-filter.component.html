@@ -1,47 +1,81 @@
 <form [formGroup]="filterForm" class="filter-form">
+
   <div class="filter-grid">
-    <mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Origen</mat-label>
-      <input matInput formControlName="origin" placeholder="Ej: 1, 2, 3...">
+      <input
+        matInput
+        type="text"
+        formControlName="origin"
+        placeholder="Ej: 1, 2, 3..." />
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Destino</mat-label>
-      <input matInput formControlName="destination" placeholder="Ej: 1, 2, 3...">
+      <input
+        matInput
+        type="text"
+        formControlName="destination"
+        placeholder="Ej: 1, 2, 3..." />
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Estado</mat-label>
       <mat-select formControlName="status">
         <mat-option value="">Todos</mat-option>
-        <mat-option *ngFor="let status of statusOptions" [value]="status.value">
+        <mat-option
+          *ngFor="let status of statusOptions"
+          [value]="status.value">
           {{ status.label }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Prioridad</mat-label>
-      <input matInput formControlName="priority" placeholder="Ej: 1, 2, 3...">
+      <input
+        matInput
+        type="text"
+        formControlName="priority"
+        placeholder="Ej: 1, 2, 3..." />
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Distancia Mínima (km)</mat-label>
-      <input matInput formControlName="minDistance" placeholder="0">
+      <input
+        matInput
+        type="text"
+        formControlName="minDistance"
+        placeholder="0" />
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Distancia Máxima (km)</mat-label>
-      <input matInput formControlName="maxDistance" placeholder="1000">
+      <input
+        matInput
+        type="text"
+        formControlName="maxDistance"
+        placeholder="1000" />
     </mat-form-field>
+
   </div>
 
   <div class="filter-actions">
-    <button mat-raised-button color="primary" (click)="applyFilters()">
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="applyFilters()">
       Aplicar Filtros
     </button>
-    <button mat-stroked-button (click)="clearFilters()">
+
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="clearFilters()">
       Limpiar
     </button>
   </div>
+
 </form>

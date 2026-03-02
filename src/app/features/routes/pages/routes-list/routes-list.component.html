@@ -1,100 +1,147 @@
 <div class="routes-list-container">
+
+  <!-- ================= HEADER / FILTROS ================= -->
   <mat-card class="header-section">
-    <mat-card-header>
-      <mat-card-title>Gestión de Rutas</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <app-route-filter (filterApplied)="loadFiltered($event)"></app-route-filter>
-    </mat-card-content>
+
+    <div class="header-top">
+      <h1>Gestión de Rutas</h1>
+    </div>
+
+    <div class="filters-wrapper">
+      <app-route-filter
+        (filterApplied)="loadFiltered($event)">
+      </app-route-filter>
+    </div>
+
   </mat-card>
 
+
+  <!-- ================= TABLA ================= -->
   <mat-card class="table-section">
+
     <mat-card-header>
       <mat-card-title>Rutas Disponibles</mat-card-title>
-      <button mat-raised-button color="primary" 
-              [disabled]="selectedRoutes.length === 0"
-              (click)="executeSelected()"
-              class="execute-btn">
+
+      <button
+        mat-raised-button
+        class="execute-btn"
+        [disabled]="selectedRoutes.length === 0"
+        (click)="executeSelected()">
+
         <mat-icon>play_arrow</mat-icon>
-        Ejecutar Seleccionadas ({{ selectedRoutes.length }})
+        Ejecutar ({{ selectedRoutes.length }})
       </button>
     </mat-card-header>
 
     <mat-card-content>
+
       <div *ngIf="isLoading" class="loading-spinner">
-        <mat-spinner></mat-spinner>
+        <mat-spinner diameter="40"></mat-spinner>
       </div>
 
-      <table mat-table [dataSource]="routes" *ngIf="!isLoading" class="routes-table">
-        <ng-container matColumnDef="select">
-          <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox 
-              [checked]="isAllSelected()"
-              [indeterminate]="isSomeSelected()"
-              (change)="toggleAllSelection()">
-            </mat-checkbox>
-          </th>
-          <td mat-cell *matCellDef="let row">
-            <mat-checkbox 
-              [checked]="selectedRoutes.includes(row.id!)"
-              (change)="toggleSelection(row.id!)">
-            </mat-checkbox>
-          </td>
-        </ng-container>
+      <div class="table-wrapper" *ngIf="!isLoading && routes.length > 0">
+        <table mat-table [dataSource]="routes" class="routes-table">
 
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef>ID</th>
-          <td mat-cell *matCellDef="let row">{{ row.id }}</td>
-        </ng-container>
+          <!-- SELECT -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox
+                [checked]="isAllSelected()"
+                [indeterminate]="isSomeSelected()"
+                (change)="toggleAllSelection()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox
+                [checked]="selectedRoutes.includes(row.id!)"
+                (change)="toggleSelection(row.id!)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="origin">
-          <th mat-header-cell *matHeaderCellDef>Origen</th>
-          <td mat-cell *matCellDef="let row">{{ row.origin }}</td>
-        </ng-container>
+          <!-- ID -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="destination">
-          <th mat-header-cell *matHeaderCellDef>Destino</th>
-          <td mat-cell *matCellDef="let row">{{ row.destination }}</td>
-        </ng-container>
+          <!-- ORIGIN -->
+          <ng-container matColumnDef="origin">
+            <th mat-header-cell *matHeaderCellDef>Origen</th>
+            <td mat-cell *matCellDef="let row">{{ row.origin }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="distance_km">
-          <th mat-header-cell *matHeaderCellDef>Distancia (km)</th>
-          <td mat-cell *matCellDef="let row">{{ row.distance_km }}</td>
-        </ng-container>
+          <!-- DESTINATION -->
+          <ng-container matColumnDef="destination">
+            <th mat-header-cell *matHeaderCellDef>Destino</th>
+            <td mat-cell *matCellDef="let row">{{ row.destination }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="priority">
-          <th mat-header-cell *matHeaderCellDef>Prioridad</th>
-          <td mat-cell *matCellDef="let row">{{ row.priority }}</td>
-        </ng-container>
+          <!-- DISTANCE -->
+          <ng-container matColumnDef="distance_km">
+            <th mat-header-cell *matHeaderCellDef>Distancia</th>
+            <td mat-cell *matCellDef="let row">
+              <span class="distance-cell">
+                {{ row.distance_km }} km
+              </span>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef>Estado</th>
-          <td mat-cell *matCellDef="let row" [ngClass]="'status-' + row.status">
-            {{ getStatusLabel(row.status) }}
-          </td>
-        </ng-container>
+          <!-- PRIORITY -->
+          <ng-container matColumnDef="priority">
+            <th mat-header-cell *matHeaderCellDef>Prioridad</th>
+            <td mat-cell *matCellDef="let row">
+              <span class="priority-badge">
+                {{ row.priority }}
+              </span>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="created_at">
-          <th mat-header-cell *matHeaderCellDef>Creada</th>
-          <td mat-cell *matCellDef="let row">{{ row.created_at | date:'short' }}</td>
-        </ng-container>
+          <!-- STATUS -->
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Estado</th>
+            <td mat-cell *matCellDef="let row">
+              <span class="status-badge status-{{ row.status }}">
+                {{ getStatusLabel(row.status) }}
+              </span>
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef>Acciones</th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-icon-button color="warn" (click)="deleteRoute(row.id!)" title="Eliminar">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
+          <!-- CREATED -->
+          <ng-container matColumnDef="created_at">
+            <th mat-header-cell *matHeaderCellDef>Creada</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.created_at | date:'short' }}
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+          <!-- ACTIONS -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
+              <button
+                mat-icon-button
+                class="delete-btn"
+                (click)="deleteRoute(row.id!)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
 
-      <div *ngIf="routes.length === 0 && !isLoading" class="no-data">
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div *ngIf="!isLoading && routes.length === 0" class="no-data">
+        <mat-icon>route</mat-icon>
         <p>No hay rutas disponibles</p>
       </div>
+
     </mat-card-content>
+
   </mat-card>
+
 </div>

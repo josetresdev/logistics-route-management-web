@@ -1,29 +1,85 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { RoutesService } from '../../services/routes.service';
-import { Route } from '../../../../shared/models/route.model';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
+} from '@angular/core';
+
+import { CommonModule, DatePipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
+
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+import {
+  RoutesService,
+  QueryParams
+} from '../../services/routes.service';
+
+import {
+  Route,
+  PaginatedResponse
+} from '../../../../shared/models/route.model';
+
+import { RouteFilterComponent } from '../../components/route-filter/route-filter.component';
+import { RouteFilters } from '../../components/route-filter/route-filter.component';
+
 @Component({
   selector: 'app-routes-list',
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    DatePipe,
+    RouteFilterComponent,
+    MatTableModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatButtonModule
+  ],
   templateUrl: './routes-list.component.html',
   styleUrls: ['./routes-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoutesListComponent implements OnInit, OnDestroy {
+
   routes: Route[] = [];
   selectedRoutes: number[] = [];
   isLoading = false;
-  displayedColumns: string[] = ['select', 'id', 'origin', 'destination', 'distance_km', 'priority', 'status', 'created_at', 'actions'];
-  
-  private destroy$ = new Subject<void>();
+
+  displayedColumns: string[] = [
+    'select',
+    'id',
+    'origin',
+    'destination',
+    'distance_km',
+    'priority',
+    'status',
+    'created_at',
+    'actions'
+  ];
+
+  currentPage = 1;
+  pageSize = 25;
+  totalItems = 0;
+
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
-    private routesService: RoutesService,
-    private snackBar: MatSnackBar,
-    private cdr: ChangeDetectorRef
+    private readonly routesService: RoutesService,
+    private readonly snackBar: MatSnackBar,
+    private readonly cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -35,101 +91,133 @@ export class RoutesListComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  loadRoutes(filters?: any): void {
+  /* ================= LOAD ================= */
+
+  loadRoutes(filters?: QueryParams): void {
+
     this.isLoading = true;
     this.cdr.markForCheck();
-    this.routesService.getRoutes(filters)
+
+    const params: QueryParams = {
+      page: this.currentPage,
+      page_size: this.pageSize,
+      ...(filters ?? {})
+    };
+
+    this.routesService.getRoutes(params)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        (data: Route[]) => {
-          this.routes = data;
+      .subscribe({
+        next: (response: PaginatedResponse<Route[]>) => {
+
+          const result = response?.results;
+
+          if (!result?.success) {
+            this.snackBar.open(
+              result?.message || 'Error cargando rutas',
+              'Cerrar',
+              { duration: 4000 }
+            );
+            this.isLoading = false;
+            this.cdr.markForCheck();
+            return;
+          }
+
+          this.routes = Array.isArray(result.data) ? result.data : [];
+          this.totalItems = result.meta?.pagination?.total_items ?? 0;
+          this.selectedRoutes = [];
+
           this.isLoading = false;
           this.cdr.markForCheck();
         },
-        (error) => {
-          this.snackBar.open('Error cargando rutas', 'Cerrar', { duration: 5000 });
+        error: () => {
+          this.snackBar.open('Error cargando rutas', 'Cerrar', { duration: 4000 });
           this.isLoading = false;
           this.cdr.markForCheck();
         }
-      );
+      });
   }
 
-  loadFiltered(filters: any): void {
-    this.loadRoutes(filters);
+  loadFiltered(filters: RouteFilters): void {
+    this.currentPage = 1;
+    this.loadRoutes(filters as QueryParams);
   }
 
-  toggleSelection(id: number): void {
-    if (this.selectedRoutes.includes(id)) {
-      this.selectedRoutes = this.selectedRoutes.filter(r => r !== id);
-    } else {
-      this.selectedRoutes.push(id);
-    }
+  /* ================= SELECTION ================= */
+
+  toggleSelection(id?: number): void {
+    if (typeof id !== 'number') return;
+
+    this.selectedRoutes = this.selectedRoutes.includes(id)
+      ? this.selectedRoutes.filter(r => r !== id)
+      : [...this.selectedRoutes, id];
+
     this.cdr.markForCheck();
   }
 
   toggleAllSelection(): void {
-    if (this.selectedRoutes.length === this.routes.length) {
+    if (this.isAllSelected()) {
       this.selectedRoutes = [];
     } else {
-      this.selectedRoutes = this.routes.map(r => r.id!);
+      this.selectedRoutes = this.routes
+        .filter(r => typeof r.id === 'number')
+        .map(r => r.id as number);
     }
     this.cdr.markForCheck();
   }
 
   isAllSelected(): boolean {
-    return this.selectedRoutes.length === this.routes.length && this.routes.length > 0;
+    return this.routes.length > 0 &&
+           this.selectedRoutes.length === this.routes.length;
   }
 
   isSomeSelected(): boolean {
-    return this.selectedRoutes.length > 0 && this.selectedRoutes.length < this.routes.length;
+    return this.selectedRoutes.length > 0 &&
+           this.selectedRoutes.length < this.routes.length;
   }
 
+  /* ================= ACTIONS ================= */
+
   executeSelected(): void {
-    if (this.selectedRoutes.length === 0) {
-      this.snackBar.open('Selecciona al menos una ruta', 'Cerrar', { duration: 5000 });
+
+    if (!this.selectedRoutes.length) {
+      this.snackBar.open('Selecciona al menos una ruta', 'Cerrar', { duration: 3000 });
       return;
     }
 
-    this.isLoading = true;
     this.routesService.executeRoutes(this.selectedRoutes)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(
-        () => {
-          this.snackBar.open('Rutas ejecutadas exitosamente', 'Cerrar', { duration: 5000 });
-          this.selectedRoutes = [];
-          this.loadRoutes();
-        },
-        (error) => {
-          this.snackBar.open('Error ejecutando rutas', 'Cerrar', { duration: 5000 });
-          this.isLoading = false;
-        }
-      );
+      .subscribe(() => {
+        this.snackBar.open('Rutas ejecutadas correctamente', 'Cerrar', { duration: 3000 });
+        this.loadRoutes();
+      });
   }
 
-  deleteRoute(id: number): void {
-    if (confirm('¿Estás seguro de eliminar esta ruta?')) {
-      this.routesService.deleteRoute(id)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(
-          () => {
-            this.snackBar.open('Ruta eliminada', 'Cerrar', { duration: 5000 });
-            this.loadRoutes();
-          },
-          (error) => {
-            this.snackBar.open('Error eliminando ruta', 'Cerrar', { duration: 5000 });
-            this.cdr.markForCheck();
-          }
-        );
-    }
+  deleteRoute(id?: number): void {
+
+    if (typeof id !== 'number') return;
+    if (!confirm('¿Eliminar esta ruta?')) return;
+
+    this.routesService.deleteRoute(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.snackBar.open('Ruta eliminada', 'Cerrar', { duration: 3000 });
+        this.loadRoutes();
+      });
   }
+
+  /* ================= HELPERS ================= */
 
   getStatusLabel(status: number): string {
-    const statusMap: { [key: number]: string } = {
+    const map: Record<number, string> = {
       1: 'Pendiente',
       2: 'En Proceso',
       3: 'Completada',
       4: 'Cancelada'
     };
-    return statusMap[status] || 'Desconocido';
+    return map[status] ?? 'Desconocido';
+  }
+
+  trackById(_: number, item: Route): number {
+    return item.id ?? 0;
   }
 }

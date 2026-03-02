@@ -1,133 +1,108 @@
-<mat-toolbar color="primary" class="app-toolbar" *ngIf="!isLoginPage()">
+<mat-toolbar class="app-toolbar" *ngIf="!isLoginPage()">
   <div class="toolbar-start">
-    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-btn" aria-label="Menú de navegación" title="Menú">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-btn">
       <i class="fas fa-bars"></i>
     </button>
+
     <mat-menu #menu="matMenu" class="nav-menu">
-      <a mat-menu-item routerLink="/routes" routerLinkActive="active" class="menu-item-active">
+      <a mat-menu-item routerLink="/routes" routerLinkActive="active">
         <i class="fas fa-map"></i>
         <span>Listar Rutas</span>
       </a>
-      <a mat-menu-item routerLink="/routes/import" routerLinkActive="active" class="menu-item-active">
+      <a mat-menu-item routerLink="/routes/import" routerLinkActive="active">
         <i class="fas fa-upload"></i>
         <span>Importar Rutas</span>
       </a>
-      <a mat-menu-item routerLink="/routes/logs" routerLinkActive="active" class="menu-item-active">
+      <a mat-menu-item routerLink="/routes/logs" routerLinkActive="active">
         <i class="fas fa-history"></i>
         <span>Historial de Logs</span>
       </a>
     </mat-menu>
 
-    <span class="app-logo">
+    <div class="app-logo">
       <i class="fas fa-truck logo-icon"></i>
       <span class="logo-divider">|</span>
       <span class="app-title">{{ title() }}</span>
-    </span>
+    </div>
   </div>
 
   <span class="toolbar-spacer"></span>
 
   <div class="user-section">
-    <div class="search-bar">
-      <i class="fas fa-search search-icon"></i>
-      <input matInput type="text" placeholder="Buscar rutas..." aria-label="Búsqueda rápida" class="search-input">
-    </div>
-
-    <button mat-icon-button aria-label="Notificaciones" class="notification-btn" [matMenuTriggerFor]="notifMenu" title="Notificaciones">
-      <i class="fas fa-bell notification-icon"></i>
+    <button mat-icon-button class="notification-btn" [matMenuTriggerFor]="notifMenu">
+      <i class="fas fa-bell"></i>
       <span class="notification-badge">3</span>
     </button>
+
     <mat-menu #notifMenu="matMenu" class="notification-menu">
-      <div class="notif-header"><strong>Notificaciones (3)</strong></div>
+      <div class="notif-header">Notificaciones (3)</div>
       <div mat-menu-item class="notif-item">
-        <i class="fas fa-check-circle notif-icon"></i>
-        <div class="notif-content">
-          <span class="notif-title">Importación completada</span>
-          <span class="notif-time">Hace 5 min</span>
+        <i class="fas fa-check-circle"></i>
+        <div>
+          <span>Importación completada</span>
+          <small>Hace 5 min</small>
         </div>
       </div>
       <div mat-menu-item class="notif-item">
-        <i class="fas fa-exclamation-triangle notif-icon"></i>
-        <div class="notif-content">
-          <span class="notif-title">Ruta con conflicto</span>
-          <span class="notif-time">Hace 1 hora</span>
+        <i class="fas fa-exclamation-triangle"></i>
+        <div>
+          <span>Ruta con conflicto</span>
+          <small>Hace 1 hora</small>
         </div>
       </div>
-      <div mat-menu-item class="notif-item">
-        <i class="fas fa-info-circle notif-icon"></i>
-        <div class="notif-content">
-          <span class="notif-title">Sincronización exitosa</span>
-          <span class="notif-time">Hace 2 horas</span>
-        </div>
-      </div>
-      <mat-divider></mat-divider>
-      <a mat-menu-item href="#" class="view-all"><i class="fas fa-arrow-right"></i> Ver todas</a>
     </mat-menu>
 
-    <mat-divider vertical class="toolbar-divider"></mat-divider>
+    <mat-divider vertical></mat-divider>
 
-    <button mat-icon-button [matMenuTriggerFor]="userMenu" aria-label="Menú de usuario" class="user-btn" title="Menú de usuario">
-      <div class="avatar">
-        <span>A</span>
-      </div>
+    <button mat-icon-button class="user-btn" [matMenuTriggerFor]="userMenu">
+      <div class="avatar">A</div>
     </button>
+
     <mat-menu #userMenu="matMenu" class="user-menu">
-      <div mat-menu-item class="user-info" disabled>
+      <div mat-menu-item disabled class="user-info">
         <div class="user-avatar-lg">A</div>
-        <div class="user-details">
-          <span class="user-name">{{ (currentUser$ | async)?.username || 'Admin User' }}</span>
-          <span class="user-email">admin@falabella.com</span>
+        <div>
+          <span>{{ (currentUser$ | async)?.username || 'Admin User' }}</span>
+          <small>admin@falabella.com</small>
         </div>
       </div>
       <mat-divider></mat-divider>
-      <button mat-menu-item class="menu-option">
-        <i class="fas fa-user-circle"></i>
-        <span>Mi Perfil</span>
-      </button>
-      <button mat-menu-item class="menu-option">
-        <i class="fas fa-sliders-h"></i>
-        <span>Preferencias</span>
-      </button>
-      <button mat-menu-item class="menu-option">
-        <i class="fas fa-question-circle"></i>
-        <span>Centro de Ayuda</span>
-      </button>
-      <mat-divider></mat-divider>
-      <button mat-menu-item (click)="logout()" class="menu-option logout-option">
+      <button mat-menu-item (click)="logout()" class="logout-option">
         <i class="fas fa-sign-out-alt"></i>
-        <span>Cerrar Sesión</span>
+        Cerrar Sesión
       </button>
     </mat-menu>
   </div>
 </mat-toolbar>
 
-<mat-sidenav-container class="app-container" autosize *ngIf="!isLoginPage()">
-  <mat-sidenav #sidenav mode="side" opened class="app-sidenav" [fixedInViewport]="true">
+<mat-sidenav-container class="app-container" *ngIf="!isLoginPage()">
+  <mat-sidenav mode="side" opened class="app-sidenav">
     <nav mat-nav-list>
       <mat-list-item class="dashboard-header">
-        <i class="fas fa-chart-line nav-icon"></i>
-        <span matListItemTitle>Panel de Control</span>
+        <i class="fas fa-chart-line"></i>
+        <span>Panel de Control</span>
       </mat-list-item>
-      <mat-divider></mat-divider>
+
       <a mat-list-item routerLink="/routes" routerLinkActive="active-link">
-        <i class="fas fa-map nav-icon"></i>
-        <span matListItemTitle>Rutas</span>
-        <i class="fas fa-chevron-right nav-meta"></i>
+        <i class="fas fa-map"></i>
+        <span>Rutas</span>
       </a>
+
       <a mat-list-item routerLink="/routes/import" routerLinkActive="active-link">
-        <i class="fas fa-download nav-icon"></i>
-        <span matListItemTitle>Importar</span>
-        <i class="fas fa-chevron-right nav-meta"></i>
+        <i class="fas fa-download"></i>
+        <span>Importar</span>
       </a>
+
       <a mat-list-item routerLink="/routes/logs" routerLinkActive="active-link">
-        <i class="fas fa-history nav-icon"></i>
-        <span matListItemTitle>Logs</span>
-        <i class="fas fa-chevron-right nav-meta"></i>
+        <i class="fas fa-history"></i>
+        <span>Logs</span>
       </a>
+
       <mat-divider></mat-divider>
+
       <button mat-list-item (click)="logout()">
-        <i class="fas fa-sign-out-alt nav-icon"></i>
-        <span matListItemTitle>Cerrar Sesión</span>
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Cerrar Sesión</span>
       </button>
     </nav>
   </mat-sidenav>
