@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -46,7 +47,8 @@ import { RouteFilters } from '../../components/route-filter/route-filter.compone
     MatIconModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTooltipModule
   ],
   templateUrl: './routes-list.component.html',
   styleUrls: ['./routes-list.component.scss'],
@@ -129,7 +131,8 @@ export class RoutesListComponent implements OnInit, OnDestroy {
           this.isLoading = false;
           this.cdr.markForCheck();
         },
-        error: () => {
+        error: (err) => {
+          console.error('Error cargando rutas:', err);
           this.snackBar.open('Error cargando rutas', 'Cerrar', { duration: 4000 });
           this.isLoading = false;
           this.cdr.markForCheck();
@@ -215,6 +218,16 @@ export class RoutesListComponent implements OnInit, OnDestroy {
       4: 'Cancelada'
     };
     return map[status] ?? 'Desconocido';
+  }
+
+  getStatusIcon(status: number): string {
+    const map: Record<number, string> = {
+      1: 'schedule',
+      2: 'hourglass_bottom',
+      3: 'check_circle',
+      4: 'cancel'
+    };
+    return map[status] ?? 'help';
   }
 
   trackById(_: number, item: Route): number {

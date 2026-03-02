@@ -2,6 +2,40 @@
    LOGISTICS ROUTE MANAGEMENT - CLEAN ENTERPRISE VERSION
    ========================================================== */
 
+/* Font Awesome Icon Stabilization - Comprehensive */
+i, [class*=\"fa-\"], .fa, .fas, .far, .fal, .fab, .fad, .fat, .fasr {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  text-rendering: auto !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', sans-serif !important;
+  vertical-align: -0.125em !important;
+}
+
+/* Ensure Font Awesome Free Icons use the right weight */
+.fas, .far, .fal, .fat {
+  font-family: 'Font Awesome 6 Free' !important;
+}
+
+/* Font Awesome Brands */
+.fab {
+  font-family: 'Font Awesome 6 Brands' !important;
+}
+
+/* Additional Icon Element Support */
+mat-icon {
+  i {
+    font-size: inherit;
+    font-weight: 900;
+  }
+}
+
 .app-toolbar {
   display: flex;
   align-items: center;

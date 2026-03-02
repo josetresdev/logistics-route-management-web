@@ -67,7 +67,7 @@ export class AuthService {
     return this.http.post<BackendAuthResponse>(`${this.apiUrl}/token-auth/`, credentials)
       .pipe(
         map(response => {
-          if (response.success && response.data) {
+          if (response.success && response.data && response.data.token) {
             const token = response.data.token;
             const user = response.data.user;
             

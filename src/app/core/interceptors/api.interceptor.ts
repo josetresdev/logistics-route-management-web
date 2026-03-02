@@ -21,19 +21,31 @@ export class ApiInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // Añadir token si está disponible
     const token = this.authService.getToken();
+    
+    // Para FormData, no especificar Content-Type (el navegador lo maneja automáticamente)
+    const isFormData = request.body instanceof FormData;
+    
     if (token) {
+      const headers: any = {
+        'Authorization': `Token ${token}`
+      };
+      
+      // Solo agregar Content-Type si NO es FormData
+      if (!isFormData) {
+        headers['Content-Type'] = 'application/json';
+      }
+      
       request = request.clone({
-        setHeaders: {
-          'Content-Type': 'application/json',
-          'Authorization': `Token ${token}`
-        }
+        setHeaders: headers
       });
     } else {
-      request = request.clone({
-        setHeaders: {
-          'Content-Type': 'application/json'
-        }
-      });
+      if (!isFormData) {
+        request = request.clone({
+          setHeaders: {
+            'Content-Type': 'application/json'
+          }
+        });
+      }
     }
 
     return next.handle(request).pipe(

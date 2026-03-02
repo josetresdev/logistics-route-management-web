@@ -44,25 +44,37 @@ export interface PaginatedResponse<T> {
 export interface RouteLog {
   id: number;
   route_id: number;
+  action: string;
   message: string;
-  level: 'info' | 'warning' | 'error';
-  created_at: string;
+  timestamp: string;
+  result?: 'success' | 'error';
+  execution_ms?: number;
 }
 
 /* ================= ROUTE IMPORT ================= */
 
 export interface RouteImportError {
   row?: number;
-  message: string;
+  message?: string;
+  error?: string;
+  data?: any;
+}
+
+export interface RouteImportData {
+  batch_id: number;
+  batch_name: string;
+  total: number;
+  created: number;
+  updated?: number;
+  failed: number;
+  status: string;
+  errors?: RouteImportError[];
+  created_at?: string;
 }
 
 export interface RouteImportResponse {
   success: boolean;
   message: string;
-  data: {
-    created: number;
-    updated?: number;
-    failed?: number;
-  };
+  data: RouteImportData;
   errors?: RouteImportError[];
 }

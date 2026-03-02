@@ -75,20 +75,143 @@
           </button>
 
         </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section" *ngIf="isLoading && uploadProgress > 0">
+          <div class="progress-container">
+            <div class="progress-info">
+              <h4>Procesando archivo...</h4>
+              <p class="progress-message">{{ uploadStatus }}</p>
+            </div>
+
+            <!-- Progress Bar with Phase Colors -->
+            <div class="progress-bar-wrapper">
+              <mat-progress-bar
+                mode="determinate"
+                [value]="uploadProgress"
+                class="progress-bar"
+                [ngClass]="{
+                  'phase-upload': processingPhase === 'upload',
+                  'phase-validation': processingPhase === 'validation',
+                  'phase-processing': processingPhase === 'processing',
+                  'phase-saving': processingPhase === 'saving'
+                }">
+              </mat-progress-bar>
+              <span class="progress-percentage">{{ uploadProgress }}%</span>
+            </div>
+
+            <!-- Current Action with Spinner -->
+            <div class="current-action-display">
+              <mat-spinner diameter="20" class="progress-spinner"></mat-spinner>
+              <span class="action-text">{{ currentAction }}</span>
+            </div>
+
+            <!-- Processing Phases -->
+            <div class="processing-phases">
+              <div class="phase-item" *ngFor="let phase of processingPhases" 
+                   [class.active]="processingPhase === phase.id"
+                   [class.completed]="phase.completed">
+                <div class="phase-icon-wrapper">
+                  <mat-icon *ngIf="!phase.completed && processingPhase !== phase.id" 
+                             class="phase-icon pending">radio_button_unchecked</mat-icon>
+                  <mat-icon *ngIf="phase.completed" 
+                             class="phase-icon completed">check_circle</mat-icon>
+                  <mat-icon *ngIf="!phase.completed && processingPhase === phase.id" 
+                             class="phase-icon active rotating">{{ phase.icon }}</mat-icon>
+                </div>
+                <span class="phase-label" [class.active-text]="processingPhase === phase.id">{{ phase.label }}</span>
+              </div>
+            </div>
+
+            <!-- File and Progress Details -->
+            <div class="progress-details">
+              <div class="detail-row">
+                <div class="detail-item">
+                  <mat-icon>description</mat-icon>
+                  <span>{{ selectedFile!.name }}</span>
+                </div>
+                <div class="detail-item">
+                  <mat-icon>storage</mat-icon>
+                  <span>{{ (selectedFile!.size / 1024).toFixed(2) }} KB</span>
+                </div>
+              </div>
+
+              <!-- Records Progress (only show when processing) -->
+              <div class="records-progress" *ngIf="processingPhase && recordsProcessed > 0">
+                <div class="records-info">
+                  <span class="records-count">{{ recordsProcessed | number }} / {{ totalRecords | number }} registros</span>
+                  <span class="records-speed" *ngIf="recordsPerSecond > 0">{{ recordsPerSecond }} reg/s</span>
+                  <span class="time-remaining" *ngIf="estimatedTimeRemaining !== '—'">Tiempo estimado: {{ estimatedTimeRemaining }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- Success Section -->
       <div class="success-section" *ngIf="importResult && !hasErrors">
-        <mat-icon class="success-icon">check_circle</mat-icon>
-        <h3>¡Importación Exitosa!</h3>
-        <p>{{ successMessage }}</p>
+        <div class="success-header">
+          <mat-icon class="success-icon">check_circle</mat-icon>
+          <h3>¡Importación Exitosa!</h3>
+        </div>
+
+        <div class="success-message">
+          <p>{{ successMessage }}</p>
+        </div>
+
+        <div class="success-stats">
+          <div class="stat-item">
+            <span class="stat-label">Total Procesados:</span>
+            <span class="stat-value">{{ importResult.total }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Registros Creados:</span>
+            <span class="stat-value success">{{ importResult.created }}</span>
+          </div>
+          <div class="stat-item" *ngIf="importResult.updated && importResult.updated > 0">
+            <span class="stat-label">Registros Actualizados:</span>
+            <span class="stat-value">{{ importResult.updated }}</span>
+          </div>
+          <div class="stat-item" *ngIf="importResult.failed && importResult.failed > 0">
+            <span class="stat-label">Errores:</span>
+            <span class="stat-value error">{{ importResult.failed }}</span>
+          </div>
+        </div>
+
+        <div class="batch-info" *ngIf="importResult.batch_id">
+          <p>Lote ID: <strong>#{{ importResult.batch_id }}</strong></p>
+          <p>Nombre: <strong>{{ importResult.batch_name }}</strong></p>
+          <p *ngIf="importResult.created_at">Fecha: <strong>{{ importResult.created_at | date:'short' }}</strong></p>
+        </div>
       </div>
 
       <!-- Error Section -->
-      <div class="error-section" *ngIf="hasErrors && importResult">
-        <mat-icon class="error-icon">error</mat-icon>
-        <h3>Error en la Importación</h3>
-        <p>{{ importResult.message }}</p>
+      <div class="error-section" *ngIf="hasErrors">
+        <div class="error-header">
+          <mat-icon class="error-icon">error</mat-icon>
+          <h3>Error en la Importación</h3>
+        </div>
+
+        <div class="error-message">
+          <p *ngFor="let error of errors">{{ error }}</p>
+        </div>
+
+        <!-- Error Details Table -->
+        <div class="error-details" *ngIf="errorDetails.length > 0">
+          <h4>Detalles de los errores:</h4>
+          <div class="error-table">
+            <div class="error-row header">
+              <div class="error-col">Fila</div>
+              <div class="error-col">Mensaje</div>
+            </div>
+            <div class="error-row" *ngFor="let detail of errorDetails">
+              <div class="error-col">{{ detail.row }}</div>
+              <div class="error-col">{{ detail.message }}</div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </mat-card-content>

@@ -80,17 +80,10 @@ html, body {
   border-radius: 12px;
 }
 
-/* Font Awesome Icons */
-i[class*="fa-"] {
-  font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands' !important;
-}
-
-.fas {
-  font-weight: 900 !important;
-}
-
-.fab {
-  font-weight: 400 !important;
+/* Font Awesome Icons - Base Support */
+.fas, .fab, .fal, .far, .fat {
+  line-height: 1;
+  vertical-align: -0.125em;
 }
 
 /* Scrollbar Styling */

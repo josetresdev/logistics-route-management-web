@@ -47,7 +47,9 @@ export class RoutesLogsComponent implements OnInit, OnDestroy {
     'route_id',
     'action',
     'message',
-    'timestamp'
+    'result',
+    'timestamp',
+    'execution_ms'
   ];
 
   private readonly destroy$ = new Subject<void>();
@@ -85,11 +87,22 @@ export class RoutesLogsComponent implements OnInit, OnDestroy {
       .subscribe({
 
         next: (response: any) => {
-          // DRF paginated response
-          this.logs = response?.results ?? [];
+          const result = response?.results;
+
+          if (!result?.success) {
+            this.snackBar.open(
+              result?.message || 'Error cargando logs',
+              'Cerrar',
+              { duration: 4000 }
+            );
+            return;
+          }
+
+          this.logs = Array.isArray(result.data) ? result.data : [];
         },
 
-        error: () => {
+        error: (err) => {
+          console.error('Error cargando logs:', err);
           this.snackBar.open('Error cargando logs', 'Cerrar', { duration: 4000 });
         }
       });
@@ -110,6 +123,17 @@ export class RoutesLogsComponent implements OnInit, OnDestroy {
     };
 
     return map[action] ?? action;
+  }
+
+  getActionIcon(action: string): string {
+    const map: Record<string, string> = {
+      create: 'add_circle',
+      update: 'edit',
+      delete: 'delete_forever',
+      execute: 'play_circle'
+    };
+
+    return map[action] ?? 'info';
   }
 
   trackById(_: number, item: RouteLog): number {
