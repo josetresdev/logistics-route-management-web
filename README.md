@@ -269,6 +269,56 @@ describe('RoutesComponent', () => {
 });
 ```
 
+## Arquitectura del Sistema
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   Frontend (Angular 21.2)                    │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │  UI Components (Material Design)                     │   │
+│  │  Services (ApiService, AuthService)                  │   │
+│  │  Routing (RxJS Observables)                          │   │
+│  └──────────────────────────────────────────────────────┘   │
+│                           │                                  │
+│           HTTP Requests (JSON + Token Auth)                  │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                 Backend (Django REST API)                    │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │  REST Endpoints                                      │   │
+│  │  Authentication (Token-based)                        │   │
+│  │  Business Logic (Services, Validators)               │   │
+│  └──────────────────────────────────────────────────────┘   │
+│                           │                                  │
+│           SQL Queries (Data Persistence)                     │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    PostgreSQL 16 Database                    │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │  Tables:                                             │   │
+│  │  - routes (rutas principales)                        │   │
+│  │  - locations (ubicaciones)                           │   │
+│  │  - execution_logs (historial de ejecuciones)         │   │
+│  │  - import_batches (lotes importados)                 │   │
+│  │  - auth_user (usuarios y autenticación)              │   │
+│  └──────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Flujo de Datos
+
+1. **Frontend** - Usuario interactúa con componentes Angular en Material Design
+2. **Comunicación** - ApiService envía requests HTTP con autenticación token-based
+3. **Backend** - Django REST API procesa la solicitud, valida y ejecuta lógica de negocio
+4. **Base de Datos** - PostgreSQL persiste y recupera datos
+5. **Respuesta** - Backend retorna JSON al frontend y actualiza la UI
+
 ## Estructura del Proyecto
 
 ```
