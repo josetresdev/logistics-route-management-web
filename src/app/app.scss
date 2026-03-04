@@ -520,149 +520,87 @@ button:hover img,
 }
 
 /* ============================================
-   GLOBAL ICON SYSTEM
+   GLOBAL ICON SIZE FIX
    ============================================ */
 
+/* iconos normales de botones */
 .icon {
   width: 18px;
   height: 18px;
   object-fit: contain;
   vertical-align: middle;
-  transition: transform .2s ease, opacity .2s ease;
-  opacity: 0.9;
 }
 
-.icon:hover {
-  transform: scale(1.1);
-  opacity: 1;
-}
-
-/* ICON BUTTONS */
-
-button mat-icon-button .icon,
-button[mat-icon-button] .icon {
-  width: 20px;
-  height: 20px;
-}
-
-/* ============================================
-   ACTION ICONS (logs)
-   ============================================ */
-
-.action-icon {
+/* iconos dentro de botones */
+button .icon {
   width: 18px;
   height: 18px;
-  margin-right: 6px;
-  vertical-align: middle;
-  opacity: 0.9;
 }
 
-/* ============================================
-   RESULT ICONS
-   ============================================ */
+/* iconos de acciones en tablas */
+.action-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  object-fit: contain;
+}
 
+/* iconos de estado */
 .result-icon {
   width: 16px;
   height: 16px;
-  margin-right: 5px;
-  vertical-align: middle;
+  margin-right: 4px;
+  object-fit: contain;
 }
 
-/* ============================================
-   UPLOAD ICONS
-   ============================================ */
-
+/* icono grande de upload */
 .upload-icon {
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
+  opacity: .7;
   margin-bottom: 10px;
-  opacity: 0.7;
 }
 
-/* ============================================
-   FILE ICONS
-   ============================================ */
-
+/* iconos de archivo */
 .file-icon {
-  width: 36px;
-  height: 36px;
-  margin-right: 10px;
+  width: 28px;
+  height: 28px;
 }
 
-.file-preview .icon {
-  width: 18px;
-}
-
-/* ============================================
-   SUCCESS / ERROR ICONS
-   ============================================ */
-
+/* iconos de éxito */
 .success-icon {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 10px;
+  width: 40px;
+  height: 40px;
 }
 
+/* iconos de error */
 .error-icon {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 10px;
+  width: 40px;
+  height: 40px;
 }
 
-/* ============================================
-   PHASE ICONS (import progress)
-   ============================================ */
-
+/* iconos de fases */
 .phase-icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
-.phase-icon.active {
-  opacity: 1;
-}
-
-.phase-icon.pending {
-  opacity: .4;
-}
-
-.phase-icon.completed {
-  filter: brightness(1.2);
-}
-
-/* rotating animation */
-
-.rotating {
-  animation: spin 1.2s linear infinite;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* ============================================
-   TABLE ICON ALIGNMENT
-   ============================================ */
-
+/* iconos dentro de tablas */
 .logs-table img {
-  vertical-align: middle;
+  max-width: 18px;
+  max-height: 18px;
+  object-fit: contain;
 }
 
-/* ============================================
-   BADGE ICON ALIGNMENT
-   ============================================ */
-
-.result-badge img,
-.route-badge img,
-.timing-badge img {
-  margin-right: 5px;
+/* iconos dentro de badges */
+.result-badge img {
+  width: 16px;
+  height: 16px;
 }
 
-/* ============================================
-   MATERIAL BUTTON ICON ALIGNMENT
-   ============================================ */
-
-button .icon {
-  margin-right: 6px;
+/* estado vacío */
+.no-data img {
+  width: 64px;
+  height: 64px;
+  opacity: .5;
 }
