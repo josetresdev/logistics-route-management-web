@@ -28,7 +28,7 @@
         [disabled]="selectedRoutes.length === 0"
         (click)="executeSelected()">
 
-        <img src="/assets/icons/boton-de-play.png" alt="Execute" class="icon">
+        <img src="/assets/icons/boton-de-play.png" alt="Execute" class="ui-icon">
         Ejecutar ({{ selectedRoutes.length }})
       </button>
     </mat-card-header>
@@ -142,7 +142,7 @@
                 class="delete-btn"
                 matTooltip="Eliminar ruta"
                 (click)="deleteRoute(row.id!)">
-                <img src="/assets/icons/basura.png" alt="Delete" class="icon">
+                <img src="/assets/icons/basura.png" alt="Delete" class="ui-icon">
               </button>
             </td>
           </ng-container>
@@ -155,7 +155,7 @@
 
       <!-- EMPTY STATE -->
       <div *ngIf="!isLoading && routes.length === 0" class="no-data">
-        <img src="/assets/icons/mapas-y-banderas.png" alt="No routes" class="icon">
+        <img src="/assets/icons/mapas-y-banderas.png" alt="No routes" class="ui-icon">
         <p>No hay rutas disponibles</p>
       </div>
 

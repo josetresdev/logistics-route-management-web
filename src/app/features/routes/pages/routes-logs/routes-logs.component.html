@@ -3,7 +3,7 @@
     <mat-card-header>
       <mat-card-title>Historial de Operaciones en Rutas</mat-card-title>
       <button mat-icon-button (click)="refreshLogs()" [disabled]="isLoading">
-        <img src="/assets/icons/boton-de-play.png" alt="Refresh" class="icon">
+        <img src="/assets/icons/boton-de-play.png" alt="Refresh" class="ui-icon">
       </button>
     </mat-card-header>
 
@@ -82,7 +82,7 @@
 
       <!-- EMPTY STATE -->
       <div *ngIf="!isLoading && logs.length === 0" class="no-data">
-        <img src="/assets/icons/calendar-days.png" alt="No data" class="icon">
+        <img src="/assets/icons/calendar-days.png" alt="No data" class="ui-icon">
         <p>No hay registros de operaciones</p>
       </div>
 
