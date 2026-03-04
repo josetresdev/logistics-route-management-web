@@ -1,26 +1,26 @@
 <mat-toolbar class="app-toolbar" *ngIf="!isLoginPage()">
   <div class="toolbar-start">
     <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-btn">
-      <i class="fas fa-bars"></i>
+      <img src="/assets/icons/mapas-y-banderas.png" alt="Menu" class="toolbar-icon">
     </button>
 
     <mat-menu #menu="matMenu" class="nav-menu">
       <a mat-menu-item routerLink="/routes" routerLinkActive="active">
-        <i class="fas fa-map"></i>
+        <img src="/assets/icons/mapas-y-banderas.png" alt="Routes" class="menu-icon">
         <span>Listar Rutas</span>
       </a>
       <a mat-menu-item routerLink="/routes/import" routerLinkActive="active">
-        <i class="fas fa-upload"></i>
+        <img src="/assets/icons/flecha-hacia-abajo.png" alt="Import" class="menu-icon">
         <span>Importar Rutas</span>
       </a>
       <a mat-menu-item routerLink="/routes/logs" routerLinkActive="active">
-        <i class="fas fa-history"></i>
+        <img src="/assets/icons/calendar-days.png" alt="Logs" class="menu-icon">
         <span>Historial de Logs</span>
       </a>
     </mat-menu>
 
     <div class="app-logo">
-      <i class="fas fa-truck logo-icon"></i>
+      <img src="/assets/icons/truck.png" alt="Logo" class="logo-icon">
       <span class="logo-divider">|</span>
       <span class="app-title">{{ title() }}</span>
     </div>
@@ -30,21 +30,21 @@
 
   <div class="user-section">
     <button mat-icon-button class="notification-btn" [matMenuTriggerFor]="notifMenu">
-      <i class="fas fa-bell"></i>
+      <img src="/assets/icons/advertencia.png" alt="Notifications" class="toolbar-icon">
       <span class="notification-badge">3</span>
     </button>
 
     <mat-menu #notifMenu="matMenu" class="notification-menu">
       <div class="notif-header">Notificaciones (3)</div>
       <div mat-menu-item class="notif-item">
-        <i class="fas fa-check-circle"></i>
+        <img src="/assets/icons/garrapata.png" alt="Success" class="notif-icon">
         <div>
           <span>Importación completada</span>
           <small>Hace 5 min</small>
         </div>
       </div>
       <div mat-menu-item class="notif-item">
-        <i class="fas fa-exclamation-triangle"></i>
+        <img src="/assets/icons/advertencia.png" alt="Warning" class="notif-icon">
         <div>
           <span>Ruta con conflicto</span>
           <small>Hace 1 hora</small>
@@ -68,7 +68,7 @@
       </div>
       <mat-divider></mat-divider>
       <button mat-menu-item (click)="logout()" class="logout-option">
-        <i class="fas fa-sign-out-alt"></i>
+        <img src="/assets/icons/flecha-hacia-abajo.png" alt="Logout" class="menu-icon">
         Cerrar Sesión
       </button>
     </mat-menu>
@@ -79,29 +79,29 @@
   <mat-sidenav mode="side" opened class="app-sidenav">
     <nav mat-nav-list>
       <mat-list-item class="dashboard-header">
-        <i class="fas fa-chart-line"></i>
+        <img src="/assets/icons/flag-football.png" alt="Dashboard" class="sidenav-icon">
         <span>Panel de Control</span>
       </mat-list-item>
 
       <a mat-list-item routerLink="/routes" routerLinkActive="active-link">
-        <i class="fas fa-map"></i>
+        <img src="/assets/icons/mapas-y-banderas.png" alt="Routes" class="sidenav-icon">
         <span>Rutas</span>
       </a>
 
       <a mat-list-item routerLink="/routes/import" routerLinkActive="active-link">
-        <i class="fas fa-download"></i>
+        <img src="/assets/icons/flecha-hacia-abajo.png" alt="Import" class="sidenav-icon">
         <span>Importar</span>
       </a>
 
       <a mat-list-item routerLink="/routes/logs" routerLinkActive="active-link">
-        <i class="fas fa-history"></i>
+        <img src="/assets/icons/calendar-days.png" alt="Logs" class="sidenav-icon">
         <span>Logs</span>
       </a>
 
       <mat-divider></mat-divider>
 
       <button mat-list-item (click)="logout()">
-        <i class="fas fa-sign-out-alt"></i>
+        <img src="/assets/icons/flecha-hacia-abajo.png" alt="Logout" class="sidenav-icon">
         <span>Cerrar Sesión</span>
       </button>
     </nav>

@@ -1,109 +1,197 @@
 <div class="login-container">
+
   <div class="login-background"></div>
-  
+
   <div class="login-content">
+
+    <!-- LOGIN CARD -->
     <div class="login-card">
-      <!-- Header -->
+
       <div class="login-header">
+
         <div class="logo-container">
-          <i class="fas fa-truck logo-icon-fa"></i>
+          <img src="assets/icons/truck.png" alt="Truck Logo" class="logo-image">
         </div>
+
         <h1>Logistics</h1>
         <p>Sistema de Gestión de Rutas</p>
+
       </div>
 
-      <!-- Form -->
+
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <!-- Username -->
+
+        <!-- USERNAME -->
         <div class="form-group">
+
           <mat-form-field appearance="outline" class="full-width">
+
             <mat-label>Usuario / Email</mat-label>
-            <input matInput 
-                   formControlName="username"
-                   type="text"
-                   autocomplete="username"
-                   required>
-            <i class="fas fa-user form-icon-prefix"></i>
+
+            <input
+              matInput
+              formControlName="username"
+              autocomplete="username"
+              type="text"
+              required
+            >
+
+            <img src="assets/icons/user.png" class="form-icon-prefix">
+
             <mat-error *ngIf="submitted && f['username'].errors">
-              <i class="fas fa-exclamation-circle"></i> El usuario es requerido
+
+              <img src="assets/icons/advertencia.png" class="error-icon-inline">
+
+              El usuario es requerido
+
             </mat-error>
+
           </mat-form-field>
+
         </div>
 
-        <!-- Password -->
+
+        <!-- PASSWORD -->
         <div class="form-group">
+
           <mat-form-field appearance="outline" class="full-width">
+
             <mat-label>Contraseña</mat-label>
-            <input matInput 
-                   formControlName="password"
-                   [type]="hidePassword ? 'password' : 'text'"
-                   autocomplete="password"
-                   required>
-            <i class="fas fa-lock form-icon-prefix"></i>
-            <button mat-icon-button 
-                    class="form-icon-suffix"
-                    (click)="togglePasswordVisibility()"
-                    type="button"
-                    tabindex="-1">
-              <i [class]="hidePassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+
+            <input
+              matInput
+              formControlName="password"
+              [type]="hidePassword ? 'password' : 'text'"
+              autocomplete="current-password"
+              required
+            >
+
+            <img src="assets/icons/lock.png" class="form-icon-prefix">
+
+            <button
+              mat-icon-button
+              type="button"
+              class="form-icon-suffix"
+              (click)="togglePasswordVisibility()"
+              tabindex="-1"
+            >
+
+              <img
+                [src]="hidePassword ? 'assets/icons/eye-slash.png' : 'assets/icons/eye.png'"
+                class="eye-icon"
+              >
+
             </button>
+
+
             <mat-error *ngIf="submitted && f['password'].errors">
-              <span *ngIf="f['password'].errors['required']"><i class="fas fa-exclamation-circle"></i> La contraseña es requerida</span>
-              <span *ngIf="f['password'].errors['minlength']"><i class="fas fa-exclamation-circle"></i> Mínimo 6 caracteres</span>
+
+              <span *ngIf="f['password'].errors['required']">
+
+                <img src="assets/icons/advertencia.png" class="error-icon-inline">
+
+                La contraseña es requerida
+
+              </span>
+
+              <span *ngIf="f['password'].errors['minlength']">
+
+                <img src="assets/icons/advertencia.png" class="error-icon-inline">
+
+                Mínimo 6 caracteres
+
+              </span>
+
             </mat-error>
+
           </mat-form-field>
+
         </div>
 
-        <!-- Submit Button -->
-        <button mat-raised-button 
-                type="submit"
-                class="login-btn"
-                [disabled]="loading">
-          <i *ngIf="!loading" class="fas fa-sign-in-alt"></i>
+
+        <!-- BUTTON -->
+        <button
+          mat-raised-button
+          type="submit"
+          class="login-btn"
+          [disabled]="loading"
+        >
+
+          <img *ngIf="!loading" src="assets/icons/login.png" class="btn-icon">
+
           <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+
           {{ loading ? 'Iniciando sesión...' : 'Ingresar' }}
+
         </button>
 
-        <!-- Error Message -->
-        <div *ngIf="errorMessage" class="error-message" role="alert">
-          <i class="fas fa-circle-exclamation"></i>
+
+        <!-- ERROR -->
+        <div *ngIf="errorMessage" class="error-message">
+
+          <img src="assets/icons/error.png" class="error-icon">
+
           <span>{{ errorMessage }}</span>
+
         </div>
+
       </form>
 
-      <!-- Help Text -->
+
+      <!-- DEMO -->
       <div class="help-text">
-        <i class="fas fa-info-circle"></i>
-        <p><strong>Credenciales de Demo:</strong></p>
-        <code>admin</code> / <code>admin123</code>
+
+        <img src="assets/icons/garrapata.png" class="info-icon">
+
+        <p><strong>Credenciales de Demo</strong></p>
+
+        <code>admin</code>
+        <code>admin123</code>
+
       </div>
+
     </div>
 
-    <!-- Right Section -->
+
+    <!-- INFO SIDE -->
     <div class="login-info">
+
       <div class="info-content">
+
         <h2>Gestión <span>Inteligente</span><br>de Rutas</h2>
-        <p>Optimiza operaciones logísticas con gestión de rutas en tiempo real</p>
-        
+
+        <p>
+          Optimiza operaciones logísticas con gestión de rutas en tiempo real
+        </p>
+
         <ul class="features">
+
           <li>
-            <i class="fas fa-check-circle feature-icon"></i>
+            <img src="assets/icons/garrapata.png" class="feature-icon">
             <span>Control completo de rutas</span>
           </li>
+
           <li>
-            <i class="fas fa-check-circle feature-icon"></i>
+            <img src="assets/icons/garrapata.png" class="feature-icon">
             <span>Seguimiento en tiempo real</span>
           </li>
+
           <li>
-            <i class="fas fa-check-circle feature-icon"></i>
+            <img src="assets/icons/garrapata.png" class="feature-icon">
             <span>Análisis detallado de logs</span>
           </li>
+
           <li>
-            <i class="fas fa-check-circle feature-icon"></i>
+            <img src="assets/icons/garrapata.png" class="feature-icon">
             <span>Importación automática</span>
           </li>
+
         </ul>
+
       </div>
+
     </div>
+
   </div>
+
 </div>

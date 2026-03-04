@@ -222,12 +222,12 @@ export class RoutesListComponent implements OnInit, OnDestroy {
 
   getStatusIcon(status: number): string {
     const map: Record<number, string> = {
-      1: 'schedule',
-      2: 'hourglass_bottom',
-      3: 'check_circle',
-      4: 'cancel'
+      1: 'hourglass-end',
+      2: 'hourglass-end',
+      3: 'check-circle',
+      4: 'circle-xmark'
     };
-    return map[status] ?? 'help';
+    return map[status] ?? 'question-circle';
   }
 
   trackById(_: number, item: Route): number {

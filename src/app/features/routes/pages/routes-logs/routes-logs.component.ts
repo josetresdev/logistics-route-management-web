@@ -127,13 +127,13 @@ export class RoutesLogsComponent implements OnInit, OnDestroy {
 
   getActionIcon(action: string): string {
     const map: Record<string, string> = {
-      create: 'add_circle',
-      update: 'edit',
-      delete: 'delete_forever',
-      execute: 'play_circle'
+      create: 'circle-plus',
+      update: 'pen',
+      delete: 'trash',
+      execute: 'circle-play'
     };
 
-    return map[action] ?? 'info';
+    return map[action] ?? 'circle-info';
   }
 
   trackById(_: number, item: RouteLog): number {

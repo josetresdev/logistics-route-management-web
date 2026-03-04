@@ -392,3 +392,129 @@ mat-icon {
   background: #587800;
   border-radius: 4px;
 }
+
+/* ==========================================================
+   GLOBAL ICON SYSTEM
+   Normaliza todos los iconos PNG/SVG del sistema
+   ========================================================== */
+
+img[class*="icon"],
+.toolbar-icon,
+.menu-icon,
+.sidenav-icon,
+.notif-icon,
+.upload-icon,
+.file-icon,
+.location-icon,
+.badge-icon,
+.date-icon,
+.action-icon,
+.result-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* Iconos dentro de botones */
+button img.icon,
+button .toolbar-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Toolbar icons */
+.app-toolbar img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Sidebar navigation icons */
+.app-sidenav .sidenav-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Menu icons */
+.mat-mdc-menu-item img {
+  width: 16px;
+  height: 16px;
+}
+
+/* Upload section */
+.upload-icon {
+  width: 36px;
+  height: 36px;
+  opacity: 0.8;
+}
+
+/* File preview icons */
+.file-icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* Table icons */
+.location-icon,
+.badge-icon,
+.date-icon,
+.action-icon,
+.result-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Notification icons */
+.notif-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Execute / action buttons */
+.execute-btn img.icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+}
+
+/* Delete button */
+.delete-btn img.icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Progress / phases */
+.phase-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Success / error icons */
+.success-icon,
+.error-icon {
+  width: 28px;
+  height: 28px;
+}
+
+/* Empty state icons */
+.no-data img.icon {
+  width: 42px;
+  height: 42px;
+  opacity: 0.6;
+}
+
+/* Icon hover animation */
+button img,
+.mat-mdc-menu-item img,
+a img {
+  transition: transform 0.2s ease;
+}
+
+button:hover img,
+.mat-mdc-menu-item:hover img {
+  transform: scale(1.1);
+}

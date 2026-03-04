@@ -11,7 +11,7 @@
       <div class="upload-section" *ngIf="!importResult">
 
         <div class="upload-area">
-          <mat-icon class="upload-icon">cloud_upload</mat-icon>
+          <img src="/assets/icons/flecha-hacia-abajo.png" alt="Upload" class="upload-icon">
           <h3>Selecciona un archivo Excel</h3>
           <p>Arrastra tu archivo aquí o haz clic para seleccionar</p>
 
@@ -28,14 +28,14 @@
             (click)="fileInput.click()"
             [disabled]="isLoading">
 
-            <mat-icon>attach_file</mat-icon>
+            <img src="/assets/icons/clip-de-papel-de-metal.png" alt="Attachment" class="icon">
             Seleccionar Archivo
           </button>
         </div>
 
         <!-- File Preview -->
         <div *ngIf="selectedFile" class="file-preview">
-          <mat-icon class="file-icon">description</mat-icon>
+          <img src="/assets/icons/clip-de-papel-de-metal.png" alt="File" class="file-icon">
 
           <div class="file-info">
             <p class="file-name">{{ selectedFile.name }}</p>
@@ -49,7 +49,7 @@
             (click)="resetForm()"
             [disabled]="isLoading">
 
-            <mat-icon>close</mat-icon>
+            <img src="/assets/icons/advertencia.png" alt="Close" class="icon">
           </button>
         </div>
 
@@ -63,7 +63,7 @@
             [disabled]="isLoading"
             class="import-btn">
 
-            <mat-icon *ngIf="!isLoading">upload</mat-icon>
+            <img *ngIf="!isLoading" src="/assets/icons/flecha-hacia-abajo.png" alt="Upload" class="icon">
             {{ isLoading ? 'Importando...' : 'Importar' }}
           </button>
 
@@ -112,12 +112,12 @@
                    [class.active]="processingPhase === phase.id"
                    [class.completed]="phase.completed">
                 <div class="phase-icon-wrapper">
-                  <mat-icon *ngIf="!phase.completed && processingPhase !== phase.id" 
-                             class="phase-icon pending">radio_button_unchecked</mat-icon>
-                  <mat-icon *ngIf="phase.completed" 
-                             class="phase-icon completed">check_circle</mat-icon>
-                  <mat-icon *ngIf="!phase.completed && processingPhase === phase.id" 
-                             class="phase-icon active rotating">{{ phase.icon }}</mat-icon>
+                  <img *ngIf="!phase.completed && processingPhase !== phase.id" 
+                     src="/assets/icons/mapas-y-banderas.png" alt="Pending" class="phase-icon pending">
+                  <img *ngIf="phase.completed" 
+                     src="/assets/icons/garrapata.png" alt="Done" class="phase-icon completed">
+                  <img *ngIf="!phase.completed && processingPhase === phase.id" 
+                     src="/assets/icons/{{phase.icon}}.png" alt="Processing" class="phase-icon active rotating">
                 </div>
                 <span class="phase-label" [class.active-text]="processingPhase === phase.id">{{ phase.label }}</span>
               </div>
@@ -127,11 +127,11 @@
             <div class="progress-details">
               <div class="detail-row">
                 <div class="detail-item">
-                  <mat-icon>description</mat-icon>
+                  <img src="/assets/icons/clip-de-papel-de-metal.png" alt="File" class="icon">
                   <span>{{ selectedFile!.name }}</span>
                 </div>
                 <div class="detail-item">
-                  <mat-icon>storage</mat-icon>
+                  <img src="/assets/icons/calendar-days.png" alt="Size" class="icon">
                   <span>{{ (selectedFile!.size / 1024).toFixed(2) }} KB</span>
                 </div>
               </div>
@@ -153,7 +153,7 @@
       <!-- Success Section -->
       <div class="success-section" *ngIf="importResult && !hasErrors">
         <div class="success-header">
-          <mat-icon class="success-icon">check_circle</mat-icon>
+          <img src="/assets/icons/garrapata.png" alt="Success" class="success-icon">
           <h3>¡Importación Exitosa!</h3>
         </div>
 
@@ -190,7 +190,7 @@
       <!-- Error Section -->
       <div class="error-section" *ngIf="hasErrors">
         <div class="error-header">
-          <mat-icon class="error-icon">error</mat-icon>
+          <img src="/assets/icons/error.png" alt="Error" class="error-icon">
           <h3>Error en la Importación</h3>
         </div>
 

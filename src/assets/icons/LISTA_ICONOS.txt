@@ -1,0 +1,57 @@
+📁 LISTA DE ICONOS PNG NECESARIOS (41 total)
+
+Descarga estos 41 PNG de https://fontawesome.com/icons (formato PNG, 24x24 o 32x32 píxeles)
+
+NOMBRE_PNG                    | FONTAWESOME_ICON
+====================================================
+truck.png                     | fa-truck
+user.png                      | fa-user
+lock.png                      | fa-lock
+exclamation.png               | fa-circle-exclamation
+login.png                     | fa-right-to-bracket
+error.png                     | fa-circle-xmark
+info.png                      | fa-circle-info
+check.png                     | fa-check-circle
+bars.png                      | fa-bars
+map.png                       | fa-map
+upload.png                    | fa-upload
+download.png                  | fa-download
+history.png                   | fa-history
+bell.png                      | fa-bell
+chart.png                     | fa-chart-line
+logout.png                    | fa-right-from-bracket
+paperclip.png                 | fa-paperclip
+file.png                      | fa-file-alt
+database.png                  | fa-database
+xmark.png                     | fa-xmark
+cloud-upload.png              | fa-cloud-arrow-up
+location.png                  | fa-location-dot
+globe.png                     | fa-globe
+flag.png                      | fa-flag
+calendar.png                  | fa-calendar
+trash.png                     | fa-trash
+play.png                      | fa-play
+refresh.png                   | fa-rotate-right
+hourglass.png                 | fa-hourglass-end
+check-circle.png              | fa-check-circle
+circle-outline.png            | fa-circle (Regular, no Solid)
+processing.png                | fa-spinner
+save.png                      | fa-floppy-disk
+circle-plus.png               | fa-circle-plus
+pen.png                       | fa-pen
+circle-play.png               | fa-circle-play
+circle-info.png               | fa-circle-info
+circle-xmark.png              | fa-circle-xmark
+question-circle.png           | fa-circle-question
+
+INSTRUCCIONES:
+1. Descarga cada icono PNG desde FontAwesome
+2. Copia todos a: src/assets/icons/
+3. Verifica que los nombres sean EXACTOS (mayúsculas importan)
+4. Ejecuta: npm run build o npm start
+
+NOTAS:
+- circle-outline.png debe ser de FontAwesome "Regular" style (no Solid)
+- Todos los demás son "Solid" style
+- Tamaño recomendado: 24x24, 32x32 o 48x48 píxeles
+- Preferiblemente con fondo transparente

@@ -193,6 +193,10 @@
               transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
               padding-left: 44px !important;
               height: 44px !important;
+
+              &.mdc-text-field--filled {
+                background-color: #f7f8fa !important;
+              }
             }
             .mat-mdc-form-field-label {
               color: #888 !important;
@@ -240,6 +244,20 @@
               align-items: center;
               justify-content: center;
               line-height: 1;
+              width: 24px;
+              height: 24px;
+              transition: all 0.3s ease-out;
+
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+              }
+
+              &:hover {
+                color: #7fa800;
+                transform: translateY(-50%) scale(1.1);
+              }
             }
 
             .form-icon-suffix {
@@ -252,9 +270,27 @@
               display: flex;
               align-items: center;
               justify-content: center;
+              cursor: pointer;
+              border-radius: 8px;
+
+              img {
+                width: 20px;
+                height: 20px;
+                object-fit: contain;
+                transition: transform 0.3s ease-out;
+              }
               
               &:hover {
                 color: #AAD500;
+                background: rgba(170, 213, 0, 0.08);
+
+                img {
+                  transform: scale(1.15);
+                }
+              }
+
+              &:active {
+                transform: scale(0.95);
               }
             }
 
@@ -386,6 +422,26 @@
         animation: slideInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         border: 1px solid rgba(211, 47, 47, 0.1);
 
+        .error-icon-inline {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 20px;
+          height: 20px;
+          color: #d32f2f;
+          font-size: 16px;
+          font-weight: 900;
+          line-height: 1;
+          flex-shrink: 0;
+          animation: shake 0.4s ease-in-out;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+
         mat-icon {
           color: #d32f2f;
           margin: 0;
@@ -393,6 +449,7 @@
           width: 22px;
           height: 22px;
           animation: shake 0.5s ease-in-out;
+          flex-shrink: 0;
         }
 
         i {
@@ -401,6 +458,7 @@
           animation: shake 0.5s ease-in-out;
           font-weight: 900;
           min-width: 22px;
+          line-height: 1;
         }
 
         span {
@@ -410,6 +468,84 @@
           line-height: 1.5;
           font-family: 'Poppins', sans-serif;
         }
+      }
+
+      .error-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+        color: #d32f2f;
+        font-size: 56px;
+        font-weight: 900;
+        line-height: 1;
+        margin: 0 auto 16px;
+        animation: shake 0.5s ease-in-out;
+        flex-shrink: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .eye-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        transition: all 0.3s ease-out;
+        color: #666;
+        line-height: 1;
+        flex-shrink: 0;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          transition: transform 0.3s ease-out;
+        }
+
+        &:hover img {
+          transform: scale(1.15);
+        }
+
+        &:active img {
+          transform: scale(0.95);
+        }
+      }
+
+      .btn-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        font-size: 16px;
+        font-weight: 900;
+        line-height: 1;
+        flex-shrink: 0;
+        margin-right: 8px;
+        transition: all 0.3s ease-out;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      mat-icon {
+        color: #AAD500;
+        font-size: 22px;
+        width: 22px;
+        height: 22px;
+        font-family: 'Poppins', sans-serif !important;
+        transition: all 0.3s ease-out;
       }
 
       .help-text {
@@ -651,5 +787,106 @@
       }
       .login-info { display: none; }
     }
+  }
+}
+
+/* ---------- ICON ALIGNMENT FIX ---------- */
+
+/* Ajusta el padding del input para dejar espacio al icono */
+::ng-deep .mdc-text-field__input {
+  padding-left: 40px !important;
+  padding-right: 36px !important;
+}
+
+/* Icono izquierdo (user / lock) */
+.form-icon-prefix {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  z-index: 20;
+  opacity: 0.75;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+/* Icono derecho (eye toggle) */
+.form-icon-suffix {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Icono del botón login */
+.btn-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Iconos de lista (checkmarks del lado derecho) */
+.feature-icon {
+  width: 10px;
+  height: 30px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Icono del bloque demo */
+.info-icon {
+  width: 18px;
+  height: 18px;
+  margin-bottom: 6px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Iconos de error */
+.error-icon-inline {
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.error-icon {
+  width: 20px;
+  height: 20px;
+
+  img {
+    width: 100%;
+    height: 100%;
   }
 }

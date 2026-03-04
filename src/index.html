@@ -11,8 +11,19 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="apple-touch-icon" href="favicon.ico" />
 
-    <!-- Font Awesome 6.5.1 CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Awesome 6.5.1 - Local + CDN Fallback for all icon sets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+          integrity="sha512-DTOQO9RWCH3H5EM6DLFOx7movXMrNUtenTkn7CL8jRa7nKSJ7Z08qy0frBQRxQcC1EFAwqlRT7gAEd+/I6LCw==" 
+          crossorigin="anonymous" 
+          referrerpolicy="no-referrer" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2" 
+          as="font" 
+          type="font/woff2" 
+          crossorigin />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-brands-400.woff2" 
+          as="font" 
+          type="font/woff2" 
+          crossorigin />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

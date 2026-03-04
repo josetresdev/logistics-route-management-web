@@ -5,6 +5,9 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
+// Font Awesome 6.5.1 CSS - Full Icon Library from npm
+@import '@fortawesome/fontawesome-free/css/all.css';
+
 // Define custom color palette - softer greens for better UX
 $custom-primary: (
   0: #000000,
@@ -80,10 +83,504 @@ html, body {
   border-radius: 12px;
 }
 
-/* Font Awesome Icons - Base Support */
+/* Font Awesome Icons - Enhanced Support */
 .fas, .fab, .fal, .far, .fat {
+  display: inline-block;
   line-height: 1;
   vertical-align: -0.125em;
+  font-size: 1em;
+  margin-right: 0.5em;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+/* Ensure icons inherit color from parent */
+i[class*="fa-"] {
+  font-style: normal;
+  font-weight: inherit;
+}
+
+/* ================================ */
+/* COMPREHENSIVE ICON STYLING SYSTEM */
+/* ================================ */
+
+/* Base PNG Image Icons */
+img[src*="assets/icons/"] {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+/* Logo Icon Styles */
+.logo-icon,
+.logo-icon-fa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all 0.3s ease-out;
+}
+
+.logo-icon-fa {
+  font-size: 56px;
+  width: 56px;
+  height: 56px;
+  color: #AAD500;
+  filter: drop-shadow(0 6px 16px rgba(170, 213, 0, 0.3));
+  animation: float 3.5s ease-in-out infinite;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.logo-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 20px rgba(170, 213, 0, 0.35));
+  animation: float 3.5s ease-in-out infinite;
+}
+
+/* Form Input Icon Styles */
+.form-icon-prefix {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: #AAD500;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1;
+  pointer-events: none;
+  flex-shrink: 0;
+  margin-right: 8px;
+  transition: all 0.3s ease-out;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &:hover {
+    color: #7fa800;
+  }
+}
+
+.form-icon-suffix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: #999;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1;
+  min-width: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  border-radius: 8px;
+
+  img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+
+  &:hover {
+    color: #AAD500;
+    background: rgba(170, 213, 0, 0.08);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Eye Icon - Password Toggle */
+.eye-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  color: #666;
+  line-height: 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease-out;
+  }
+
+  &:hover img {
+    transform: scale(1.1);
+  }
+
+  &:active img {
+    transform: scale(0.95);
+  }
+}
+
+/* Button Icon Styles */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-right: 8px;
+  transition: all 0.3s ease-out;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+/* Error/Inline Alert Icons */
+.error-icon-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: #d32f2f;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-right: 6px;
+  animation: shake 0.4s ease-in-out;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.error-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  color: #d32f2f;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+  margin: 0 auto 16px;
+  animation: shake 0.5s ease-in-out;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+/* Success/Check Icons */
+.success-icon,
+.check-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4caf50;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1;
+  animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+/* Feature Icons in Lists */
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: #fff;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+  animation: scaleIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 900;
+  min-width: 28px;
+  line-height: 1;
+
+  img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+}
+
+/* Action Icons in Tables/Lists */
+.action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: #AAD500;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  border-radius: 4px;
+  padding: 4px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &:hover {
+    color: #7fa800;
+    background: rgba(170, 213, 0, 0.1);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Small inline icons */
+.icon-xs {
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+}
+
+.icon-sm {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+.icon-md {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+}
+
+.icon-lg {
+  width: 32px;
+  height: 32px;
+  font-size: 32px;
+}
+
+.icon-xl {
+  width: 48px;
+  height: 48px;
+  font-size: 48px;
+}
+
+.icon-2xl {
+  width: 64px;
+  height: 64px;
+  font-size: 64px;
+}
+
+/* Icon Color Variants */
+.icon-primary {
+  color: #AAD500;
+}
+
+.icon-secondary {
+  color: #7fa800;
+}
+
+.icon-success {
+  color: #4caf50;
+}
+
+.icon-error {
+  color: #d32f2f;
+}
+
+.icon-warning {
+  color: #ff9800;
+}
+
+.icon-info {
+  color: #2196f3;
+}
+
+.icon-muted {
+  color: #999;
+}
+
+.icon-light {
+  color: #f0f0f0;
+}
+
+.icon-dark {
+  color: #333;
+}
+
+/* Icon Animation States */
+.icon-spin {
+  animation: spin 1s linear infinite;
+}
+
+.icon-pulse {
+  animation: pulse-icon 2s ease-in-out infinite;
+}
+
+.icon-bounce {
+  animation: bounce 0.6s ease-in-out;
+}
+
+.icon-flip {
+  animation: flip 0.6s ease-in-out;
+}
+
+/* Material Icons Enhancement */
+mat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 1;
+  font-weight: 900;
+
+  &.icon-primary {
+    color: #AAD500;
+  }
+
+  &.icon-error {
+    color: #d32f2f;
+  }
+
+  &.icon-success {
+    color: #4caf50;
+  }
+}
+
+/* SVG Icons */
+svg[class*="icon"] {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  transition: all 0.3s ease-out;
+  flex-shrink: 0;
+}
+
+/* ========================= */
+/* ICON ANIMATIONS */
+/* ========================= */
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-icon {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes flip {
+  from { transform: rotateY(0); }
+  to { transform: rotateY(180deg); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0; 
+    transform: scale(0.6); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+
+/* Responsive Icon Sizing */
+@media (max-width: 768px) {
+  .logo-icon-fa {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .feature-icon {
+    font-size: 24px;
+    min-width: 24px;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .error-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-icon-fa {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .form-icon-prefix {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    margin-right: 6px;
+  }
+
+  .form-icon-suffix {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+  }
 }
 
 /* Scrollbar Styling */
