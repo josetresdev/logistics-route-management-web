@@ -36,14 +36,20 @@ export class ApiInterceptor implements HttpInterceptor {
       }
       
       request = request.clone({
-        setHeaders: headers
+        setHeaders: headers,
+        withCredentials: true
       });
     } else {
       if (!isFormData) {
         request = request.clone({
           setHeaders: {
             'Content-Type': 'application/json'
-          }
+          },
+          withCredentials: true
+        });
+      } else {
+        request = request.clone({
+          withCredentials: true
         });
       }
     }
