@@ -752,3 +752,83 @@
   50% { transform: scale(1.1); }
   100% { transform: scale(1); opacity: 1; }
 }
+
+/* =========================
+ICON SYSTEM
+========================= */
+
+.icon-btn{
+  width:18px;
+  height:18px;
+  margin-right:6px;
+  vertical-align:middle;
+}
+
+.icon-upload{
+  width:48px;
+  height:48px;
+  margin-bottom:12px;
+  opacity:.8;
+}
+
+.icon-file{
+  width:32px;
+  height:32px;
+}
+
+.icon-cell{
+  width:16px;
+  height:16px;
+  margin-right:6px;
+}
+
+.icon-phase{
+  width:20px;
+  height:20px;
+}
+
+.icon-success{
+  width:48px;
+  height:48px;
+}
+
+.icon-error{
+  width:48px;
+  height:48px;
+}
+
+
+/* =========================
+LAYOUT HELPERS
+========================= */
+
+.file-preview{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.detail-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.phase-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.upload-area{
+  text-align:center;
+}
+
+.rotating{
+  animation:spin 1.5s linear infinite;
+}
+
+@keyframes spin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}

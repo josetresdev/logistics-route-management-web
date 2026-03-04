@@ -322,3 +322,93 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* =========================
+ICON SYSTEM
+========================= */
+
+.icon-btn{
+  width:18px;
+  height:18px;
+}
+
+.icon-cell{
+  width:16px;
+  height:16px;
+  margin-right:6px;
+}
+
+.icon-badge{
+  width:14px;
+  height:14px;
+  margin-right:4px;
+}
+
+.icon-empty{
+  width:60px;
+  height:60px;
+  opacity:.5;
+}
+
+/* =========================
+LAYOUT
+========================= */
+
+.cell-with-icon{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* =========================
+BADGES
+========================= */
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:4px 8px;
+  border-radius:6px;
+  font-size:13px;
+}
+
+.route-badge{
+  background:#eef5ff;
+  padding:4px 8px;
+  border-radius:6px;
+  font-weight:500;
+}
+
+.result-success{
+  background:#eaf7ee;
+}
+
+.result-error{
+  background:#fdeaea;
+}
+
+.result-pending{
+  background:#fff5e5;
+}
+
+.timing-badge{
+  background:#eef3f7;
+  padding:4px 8px;
+  border-radius:6px;
+  font-size:12px;
+}
+
+.timing-badge.empty{
+  opacity:.6;
+}
+
+/* =========================
+HEADER
+========================= */
+
+.logs-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}

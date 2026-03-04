@@ -449,3 +449,94 @@
     gap: 4px;
   }
 }
+/* =========================================
+ICON SYSTEM
+========================================= */
+
+.icon-btn {
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.icon-cell {
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+}
+
+.icon-badge {
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+}
+
+.icon-empty {
+  width: 64px;
+  height: 64px;
+  opacity: .5;
+}
+
+/* =========================================
+CELLS
+========================================= */
+
+.cell-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* =========================================
+BADGES
+========================================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.distance-badge {
+  background: #eef5ff;
+}
+
+.priority-high {
+  background: #ffeaea;
+}
+
+.priority-medium {
+  background: #fff5e5;
+}
+
+.priority-low {
+  background: #eef9ee;
+}
+
+.status-active {
+  background: #e9f7ee;
+}
+
+.status-pending {
+  background: #fff6e5;
+}
+
+/* =========================================
+TABLE
+========================================= */
+
+.routes-table img {
+  max-width: 18px;
+  max-height: 18px;
+  object-fit: contain;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

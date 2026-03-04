@@ -19,16 +19,17 @@
   <!-- ================= TABLA ================= -->
   <mat-card class="table-section">
 
-    <mat-card-header>
+    <mat-card-header class="table-header">
       <mat-card-title>Rutas Disponibles</mat-card-title>
 
       <button
         mat-raised-button
+        color="primary"
         class="execute-btn"
         [disabled]="selectedRoutes.length === 0"
         (click)="executeSelected()">
 
-        <img src="/assets/icons/boton-de-play.png" alt="Execute" class="ui-icon">
+        <img src="/assets/icons/boton-de-play.png" class="icon-btn">
         Ejecutar ({{ selectedRoutes.length }})
       </button>
     </mat-card-header>
@@ -40,6 +41,7 @@
       </div>
 
       <div class="table-wrapper" *ngIf="!isLoading && routes.length > 0">
+
         <table mat-table [dataSource]="routes" class="routes-table">
 
           <!-- SELECT -->
@@ -51,6 +53,7 @@
                 (change)="toggleAllSelection()">
               </mat-checkbox>
             </th>
+
             <td mat-cell *matCellDef="let row">
               <mat-checkbox
                 [checked]="selectedRoutes.includes(row.id!)"
@@ -58,6 +61,7 @@
               </mat-checkbox>
             </td>
           </ng-container>
+
 
           <!-- ID -->
           <ng-container matColumnDef="id">
@@ -67,95 +71,116 @@
             </td>
           </ng-container>
 
+
           <!-- ORIGIN -->
           <ng-container matColumnDef="origin">
             <th mat-header-cell *matHeaderCellDef>Origen</th>
             <td mat-cell *matCellDef="let row">
-              <div class="location-cell">
-                <img src="/assets/icons/mapas-y-banderas.png" alt="Location" class="location-icon">
-                <span>{{ row.origin }}</span>
+              <div class="cell-with-icon">
+                <img src="/assets/icons/mapas-y-banderas.png" class="icon-cell">
+                {{ row.origin }}
               </div>
             </td>
           </ng-container>
+
 
           <!-- DESTINATION -->
           <ng-container matColumnDef="destination">
             <th mat-header-cell *matHeaderCellDef>Destino</th>
             <td mat-cell *matCellDef="let row">
-              <div class="location-cell">
-                <img src="/assets/icons/mapas-y-banderas.png" alt="Location" class="location-icon">
-                <span>{{ row.destination }}</span>
+              <div class="cell-with-icon">
+                <img src="/assets/icons/mapas-y-banderas.png" class="icon-cell">
+                {{ row.destination }}
               </div>
             </td>
           </ng-container>
+
 
           <!-- DISTANCE -->
           <ng-container matColumnDef="distance_km">
             <th mat-header-cell *matHeaderCellDef>Distancia</th>
             <td mat-cell *matCellDef="let row">
-              <span class="distance-badge">
-                <img src="/assets/icons/mapas-y-banderas.png" alt="Distance" class="badge-icon">
+              <span class="badge distance-badge">
+                <img src="/assets/icons/mapas-y-banderas.png" class="icon-badge">
                 {{ row.distance_km }} km
               </span>
             </td>
           </ng-container>
 
+
           <!-- PRIORITY -->
           <ng-container matColumnDef="priority">
             <th mat-header-cell *matHeaderCellDef>Prioridad</th>
             <td mat-cell *matCellDef="let row">
-              <span class="priority-badge" [ngClass]="'priority-' + (row.priority > 5 ? 'high' : row.priority > 3 ? 'medium' : 'low')">
-                <img src="/assets/icons/flag-football.png" alt="Priority" class="badge-icon">
+              <span class="badge priority-badge"
+                [ngClass]="'priority-' + (row.priority > 5 ? 'high' : row.priority > 3 ? 'medium' : 'low')">
+
+                <img src="/assets/icons/flag-football.png" class="icon-badge">
                 {{ row.priority }}
+
               </span>
             </td>
           </ng-container>
+
 
           <!-- STATUS -->
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef>Estado</th>
             <td mat-cell *matCellDef="let row">
-              <span class="status-badge" [ngClass]="'status-' + row.status">
-                <img src="/assets/icons/{{getStatusIcon(row.status)}}.png" alt="Status" class="badge-icon">
+              <span class="badge status-badge"
+                [ngClass]="'status-' + row.status">
+
+                <img src="/assets/icons/{{getStatusIcon(row.status)}}.png" class="icon-badge">
                 {{ getStatusLabel(row.status) }}
+
               </span>
             </td>
           </ng-container>
+
 
           <!-- CREATED -->
           <ng-container matColumnDef="created_at">
             <th mat-header-cell *matHeaderCellDef>Creada</th>
             <td mat-cell *matCellDef="let row">
-              <div class="created-cell">
-                <img src="/assets/icons/calendar-days.png" alt="Date" class="date-icon">
+              <div class="cell-with-icon">
+                <img src="/assets/icons/calendar-days.png" class="icon-cell">
                 {{ row.created_at | date:'short' }}
               </div>
             </td>
           </ng-container>
 
+
           <!-- ACTIONS -->
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef></th>
+
             <td mat-cell *matCellDef="let row">
+
               <button
                 mat-icon-button
                 class="delete-btn"
                 matTooltip="Eliminar ruta"
                 (click)="deleteRoute(row.id!)">
-                <img src="/assets/icons/basura.png" alt="Delete" class="ui-icon">
+
+                <img src="/assets/icons/basura.png" class="icon-btn">
+
               </button>
+
             </td>
           </ng-container>
+
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
         </table>
+
       </div>
+
 
       <!-- EMPTY STATE -->
       <div *ngIf="!isLoading && routes.length === 0" class="no-data">
-        <img src="/assets/icons/mapas-y-banderas.png" alt="No routes" class="ui-icon">
+        <img src="/assets/icons/mapas-y-banderas.png" class="icon-empty">
         <p>No hay rutas disponibles</p>
       </div>
 

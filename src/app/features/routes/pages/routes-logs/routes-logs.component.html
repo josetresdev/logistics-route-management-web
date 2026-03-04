@@ -1,91 +1,222 @@
 <div class="logs-container">
+
   <mat-card>
-    <mat-card-header>
-      <mat-card-title>Historial de Operaciones en Rutas</mat-card-title>
-      <button mat-icon-button (click)="refreshLogs()" [disabled]="isLoading">
-        <img src="/assets/icons/boton-de-play.png" alt="Refresh" class="ui-icon">
+
+    <mat-card-header class="logs-header">
+
+      <mat-card-title>
+        Historial de Operaciones en Rutas
+      </mat-card-title>
+
+      <button
+        mat-icon-button
+        (click)="refreshLogs()"
+        [disabled]="isLoading">
+
+        <img
+          src="/assets/icons/boton-de-play.png"
+          class="icon-btn">
+
       </button>
+
     </mat-card-header>
 
+
     <mat-card-content>
+
       <div *ngIf="isLoading" class="loading-spinner">
         <mat-spinner diameter="40"></mat-spinner>
       </div>
 
-      <div class="table-wrapper" *ngIf="!isLoading && logs.length > 0">
-        <table mat-table [dataSource]="logs" class="logs-table">
+
+      <div class="table-wrapper"
+           *ngIf="!isLoading && logs.length > 0">
+
+        <table mat-table
+               [dataSource]="logs"
+               class="logs-table">
 
           <!-- ID -->
           <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef>ID</th>
-            <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+
+            <th mat-header-cell *matHeaderCellDef>
+              ID
+            </th>
+
+            <td mat-cell *matCellDef="let row">
+              {{ row.id }}
+            </td>
+
           </ng-container>
 
-          <!-- ROUTE ID -->
+
+          <!-- ROUTE -->
           <ng-container matColumnDef="route_id">
-            <th mat-header-cell *matHeaderCellDef>Ruta</th>
+
+            <th mat-header-cell *matHeaderCellDef>
+              Ruta
+            </th>
+
             <td mat-cell *matCellDef="let row">
-              <span class="route-badge">RUTA #{{ row.route_id }}</span>
+
+              <span class="route-badge">
+                RUTA #{{ row.route_id }}
+              </span>
+
             </td>
+
           </ng-container>
+
 
           <!-- ACTION -->
           <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef>Acción</th>
-            <td mat-cell *matCellDef="let row" [ngClass]="'action-' + row.action">
-              <img src="/assets/icons/{{getActionIcon(row.action)}}.png" alt="Action" class="action-icon">
-              {{ getActionLabel(row.action) }}
+
+            <th mat-header-cell *matHeaderCellDef>
+              Acción
+            </th>
+
+            <td mat-cell
+                *matCellDef="let row"
+                [ngClass]="'action-' + row.action">
+
+              <div class="cell-with-icon">
+
+                <img
+                  src="/assets/icons/{{getActionIcon(row.action)}}.png"
+                  class="icon-cell">
+
+                {{ getActionLabel(row.action) }}
+
+              </div>
+
             </td>
+
           </ng-container>
+
 
           <!-- MESSAGE -->
           <ng-container matColumnDef="message">
-            <th mat-header-cell *matHeaderCellDef>Mensaje</th>
-            <td mat-cell *matCellDef="let row" class="message-cell">
+
+            <th mat-header-cell *matHeaderCellDef>
+              Mensaje
+            </th>
+
+            <td mat-cell
+                *matCellDef="let row"
+                class="message-cell">
+
               {{ row.message }}
+
             </td>
+
           </ng-container>
+
 
           <!-- RESULT -->
           <ng-container matColumnDef="result">
-            <th mat-header-cell *matHeaderCellDef>Resultado</th>
+
+            <th mat-header-cell *matHeaderCellDef>
+              Resultado
+            </th>
+
             <td mat-cell *matCellDef="let row">
-              <span [ngClass]="'result-badge result-' + (row.result || 'pending')">
-                <img src="/assets/icons/{{row.result === 'success' ? 'check' : row.result === 'error' ? 'error' : 'hourglass'}}.png" alt="Result" class="result-icon">
+
+              <span
+                class="badge result-badge"
+                [ngClass]="'result-' + (row.result || 'pending')">
+
+                <img
+                  src="/assets/icons/{{row.result === 'success' ? 'check' : row.result === 'error' ? 'error' : 'hourglass'}}.png"
+                  class="icon-badge">
+
                 {{ (row.result || 'Pendiente') | titlecase }}
+
               </span>
+
             </td>
+
           </ng-container>
+
 
           <!-- TIMESTAMP -->
           <ng-container matColumnDef="timestamp">
-            <th mat-header-cell *matHeaderCellDef>Timestamp</th>
-            <td mat-cell *matCellDef="let row">{{ row.timestamp | date:'medium' }}</td>
+
+            <th mat-header-cell *matHeaderCellDef>
+              Timestamp
+            </th>
+
+            <td mat-cell *matCellDef="let row">
+
+              <div class="cell-with-icon">
+
+                <img
+                  src="/assets/icons/calendar-days.png"
+                  class="icon-cell">
+
+                {{ row.timestamp | date:'medium' }}
+
+              </div>
+
+            </td>
+
           </ng-container>
+
 
           <!-- EXECUTION TIME -->
           <ng-container matColumnDef="execution_ms">
-            <th mat-header-cell *matHeaderCellDef>Tiempo (ms)</th>
+
+            <th mat-header-cell *matHeaderCellDef>
+              Tiempo (ms)
+            </th>
+
             <td mat-cell *matCellDef="let row">
-              <span *ngIf="row.execution_ms" class="timing-badge">
+
+              <span
+                *ngIf="row.execution_ms"
+                class="timing-badge">
+
                 {{ row.execution_ms }}ms
+
               </span>
-              <span *ngIf="!row.execution_ms" class="timing-badge empty">-</span>
+
+              <span
+                *ngIf="!row.execution_ms"
+                class="timing-badge empty">
+
+                -
+
+              </span>
+
             </td>
+
           </ng-container>
 
+
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          <tr mat-row
+              *matRowDef="let row; columns: displayedColumns;">
+          </tr>
 
         </table>
+
       </div>
 
+
       <!-- EMPTY STATE -->
-      <div *ngIf="!isLoading && logs.length === 0" class="no-data">
-        <img src="/assets/icons/calendar-days.png" alt="No data" class="ui-icon">
+      <div *ngIf="!isLoading && logs.length === 0"
+           class="no-data">
+
+        <img
+          src="/assets/icons/calendar-days.png"
+          class="icon-empty">
+
         <p>No hay registros de operaciones</p>
+
       </div>
 
     </mat-card-content>
+
   </mat-card>
+
 </div>
